@@ -1,218 +1,164 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Women Safety</title>
-    <link rel="stylesheet" type="text/css" href="style.css" title="style">
-    <style>
-      #menubar {
-        width: 1600px !important;
-      }
-      ul#menu {
-        transform: translateX(30%) !important;
-      }
-      #right-panel {
-        font-family: 'Roboto', 'sans-serif';
-      }
-      #right-panel select, #right-panel input {
-        font-size: 15px;
-      }
-      #right-panel select {
-        width: 100%;
-      }
-      #right-panel i {
-        font-size: 12px;
-      }
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-        width: 80%;
-      }
-      #right-panel {
-        float: right;
-        width: 10%;
-      }
-      #output {
-        font-size: 11px;
-      }
-      #phone-number {
-        width: 100%;
-        padding: 5px;
-        margin-bottom: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="menubar">
-      <ul id="menu">
-        <li><a href="index.html">Welcome Page</a></li>
-        <li class="selected"><a href="page_one.html">Navigation</a></li>
-        <li><a href="page_two.html">Safe Zone</a></li>
-        <li><a href="page_three.html">Guardians</a></li>
-        <li><a href="page_four.html">Safety Alarm</a></li>
-      </ul>
-    </div>
-    <div id="right-panel">
-      <div id="inputs"></div>
-      <div><strong>Results</strong></div>
-      <div id="output"></div>
-      <h1>Geolocation with Google Maps</h1>
-<h2>Click the button to display your location on the map.</h2>
-<button onclick="getLocation()">Show My Location</button>
-<h4 id="status"></h4>
-      </div>
-
-<!-- Map container -->
-<h3 id="map"></h3>
-      <input type="text" id="phone-number" placeholder="Enter phone number (with country code)">
-      <button onclick="shareLocation()">Share Location</button>
-    </div>
-    <div id="map"></div>
-    <script>
-       const status = document.getElementById("status");
-  const mapContainer = document.getElementById("map");
-  let map, marker;
-
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-      status.textContent = "Geolocation is not supported by this browser.";
+<head>
+  <title>Women Safety</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    #menubar {
+      width: 100%;
+      background: #444;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
     }
-  }
 
-  function showPosition(position) {
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
-    const latLng = new google.maps.LatLng(lat, lng);
-
-    // Initialize the map
-    map = new google.maps.Map(mapContainer, {
-      center: latLng,
-      zoom: 15
-    });
-
-    // Place a marker at the user's location
-    marker = new google.maps.Marker({
-      position: latLng,
-      map: map,
-      title: "You are here!"
-    });
-
-    status.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
-  }
-
-  function showError(error) {
-    switch(error.code) {
-      case error.PERMISSION_DENIED:
-        status.textContent = "User denied the request for Geolocation.";
-        break;
-      case error.POSITION_UNAVAILABLE:
-        status.textContent = "Location information is unavailable.";
-        break;
-      case error.TIMEOUT:
-        status.textContent = "The request to get user location timed out.";
-        break;
-      case error.UNKNOWN_ERROR:
-        status.textContent = "An unknown error occurred.";
-        break;
+    #menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
     }
-  }
-      function initMap() {
-        var bounds = new google.maps.LatLngBounds;
-        var markersArray = [];
 
-        var origin = {lat: 12.9197, lng: 77.6836};
-        var destination = {lat: 12.9288891, lng: 77.62845209999999};
+    #menu li {
+      display: inline-block;
+      margin: 0;
+    }
 
-        var destinationIcon = 'https://chart.googleapis.com/chart?' +
-            'chst=d_map_pin_letter&chld=D|FF0000|000000';
-        var originIcon = 'https://chart.googleapis.com/chart?' +
-            'chst=d_map_pin_letter&chld=O|FFFF00|000000';
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 12.9197, lng: 77.6836},
-          zoom: 10
+    #menu li a {
+      display: block;
+      padding: 15px 20px;
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    #menu li a:hover, #menu li.selected a {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa;">
+<br><br>
+  <!-- Header -->
+  <div style="background: linear-gradient(to right, #bbeaf6, #a1a2a3); padding: 20px; color: white; text-align: center;">
+    <h1 style="margin: 0;">Women Safety</h1>
+  </div>
+
+  <!-- Navigation Bar -->
+  <div id="menubar">
+    <ul id="menu">
+      <li><a href="index.html">Welcome Page</a></li>
+      <li class="selected"><a href="page_one.html">Navigation</a></li>
+      <li><a href="page_two.html">Safe Zone</a></li>
+      <li><a href="page_three.html">Guardians</a></li>
+      <li><a href="page_four.html">Safety Alarm</a></li>
+      <li><a href="stips.html">Safety Tips & Videos</a></li>
+    </ul>
+  </div>
+
+  <!-- Container for Buttons & Input -->
+  <div style="max-width: 600px; background: white; padding: 20px; margin: 20px auto; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); text-align: center;">
+
+    <h2 style="color: #333;">Geolocation with Google Maps</h2>
+    <p>Click the button to display your location on the map.</p>
+
+    <button onclick="getLocation()" style="background: linear-gradient(45deg, #e11919, #c62828); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">Show My Location</button>
+
+    <h4 id="status" style="margin-top: 10px; color: #555;"></h4>
+
+    <div style="margin-top: 20px;">
+      <input type="text" id="phone-number" placeholder="Enter phone number (with country code)"
+        style="width: 250px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; margin-bottom: 10px;">
+      <button onclick="shareLocation()" style="background: #28a745; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">Share Location</button>
+    </div>
+
+  </div>
+
+  <!-- Map Display (Full-Width) -->
+  <div id="map" style="width: 100%; height: 500px; border-top: 2px solid #ddd;"></div>
+
+  <!-- Footer -->
+  <div style="background: #222; color: white; padding: 10px; text-align: center;">
+    Made with ❤️ by ChaoticUS
+  </div>
+
+  <script>
+    const status = document.getElementById("status");
+    const mapContainer = document.getElementById("map");
+    let map, marker;
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        status.textContent = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const latLng = new google.maps.LatLng(lat, lng);
+
+      // Initialize the map
+      map = new google.maps.Map(mapContainer, {
+        center: latLng,
+        zoom: 15
+      });
+
+      // Place a marker at the user's location
+      marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: "You are here!"
+      });
+
+      status.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
+    }
+
+    function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          status.textContent = "User denied the request for Geolocation.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          status.textContent = "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          status.textContent = "The request to get user location timed out.";
+          break;
+        case error.UNKNOWN_ERROR:
+          status.textContent = "An unknown error occurred.";
+          break;
+      }
+    }
+
+    function shareLocation() {
+      var phoneNumber = document.getElementById('phone-number').value.trim();
+      if (phoneNumber === '') {
+        alert('Please enter a phone number.');
+        return;
+      }
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          var message = 'My current location: https://www.google.com/maps?q=' + latitude + ',' + longitude;
+          window.open('https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + encodeURIComponent(message));
         });
-        var geocoder = new google.maps.Geocoder;
-
-        var service = new google.maps.DistanceMatrixService;
-        service.getDistanceMatrix({
-          origins: [origin],
-          destinations: [destination],
-          travelMode: 'DRIVING',
-          unitSystem: google.maps.UnitSystem.METRIC,
-          avoidHighways: false,
-          avoidTolls: false
-        }, function(response, status) {
-          if (status !== 'OK') {
-            alert('Error was: ' + status);
-          } else {
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            var outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = '';
-            deleteMarkers(markersArray);
-
-            var showGeocodedAddressOnMap = function(asDestination) {
-              var icon = asDestination ? destinationIcon : originIcon;
-              return function(results, status) {
-                if (status === 'OK') {
-                  map.fitBounds(bounds.extend(results[0].geometry.location));
-                  markersArray.push(new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location,
-                    icon: icon
-                  }));
-                } else {
-                  alert('Geocode was not successful due to: ' + status);
-                }
-              };
-            };
-
-            for (var i = 0; i < originList.length; i++) {
-              var results = response.rows[i].elements;
-              geocoder.geocode({'address': originList[i]},
-                  showGeocodedAddressOnMap(false));
-              for (var j = 0; j < results.length; j++) {
-                geocoder.geocode({'address': destinationList[j]},
-                    showGeocodedAddressOnMap(true));
-                outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
-                    ': ' + results[j].distance.text + ' in ' +
-                    results[j].duration.text + '<br>';
-              }
-            }
-          }
-        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
       }
+    }
+  </script>
 
-      function deleteMarkers(markersArray) {
-        for (var i = 0; i < markersArray.length; i++) {
-          markersArray[i].setMap(null);
-        }
-        markersArray = [];
-      }
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap"></script>
 
-      function shareLocation() {
-        var phoneNumber = document.getElementById('phone-number').value.trim();
-        if (phoneNumber === '') {
-          alert('Please enter a phone number.');
-          return;
-        }
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            var message = 'My current location: https://www.google.com/maps?q=' + latitude + ',' + longitude;
-            window.open('https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + encodeURIComponent(message));
-          });
-        } else {
-          alert("Geolocation is not supported by this browser.");
-        }
-      }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap"></script>
-  </body>
+</body>
 </html>

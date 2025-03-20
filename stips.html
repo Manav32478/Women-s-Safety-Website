@@ -4,43 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women Safety Tips</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <style>
+        #menubar {
+      width: 100%;
+      background: #444;      
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    #menubar {
+      background: #444;
+      padding: 10px;
+    }
+    #menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    #menu li {
+      margin: 0 15px;
+    }
+    #menu li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+      transition: 0.3s;
+    }
+    #menu li a:hover {
+        background: linear-gradient(to right, #bbeaf6, #a1a2a3);
+      border-radius: 5px;
+      padding: 10px;
+    }
+    </style>
 </head>
-<body>
-    <header id="header">
-        <h1>Women Safety Tips & Tutorials</h1>
-        <p>Your safety is our priority. Stay alert, stay safe!</p>
-        <a href="index.html" class="home-btn">🏠 Back to Home</a>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; text-align: center;">
+    <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Welcome Page</a></li>
+          <li><a href="page_one.html">Navigation</a></li>
+          <li><a href="page_two.html">Safe Zone</a></li>
+          <li><a href="page_three.html">Guardians</a></li>
+          <li><a href="page_four.html">Safety Alarm</a></li>
+          <li class="selected"><a href="stips.html">Safety Tips & Videos</a></li>
+        </ul>
+      </div>
+    <!-- Header -->
+    <header id="header" style="background: linear-gradient(to right, #bbeaf6, #a1a2a3); color: white; padding: 20px;">
+        <br><br>
+        <h1 style="margin: 0;">Women Safety Tips & Tutorials</h1>
+        <p style="margin: 5px 0;">Your safety is our priority. Stay alert, stay safe!</p>
+        <a href="index.html" style="text-decoration: none; color: white; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 5px; display: inline-block; margin-top: 10px;">🏠 Back to Home</a>
     </header>
 
-    <main class="container">
+    <!-- Main Container -->
+    <main style="max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); text-align: left;">
+
+        <!-- Safety Tips Section -->
         <section>
-            <h2>💡 Important Women Safety Tips</h2>
-            <ul class="safety-tips">
-                <li>🚶‍♀️ Always be aware of your surroundings.</li>
-                <li>📱 Keep your emergency contacts handy.</li>
-                <li>🚖 Avoid traveling alone at night.</li>
-                <li>🔦 Carry a pepper spray or safety alarm.</li>
-                <li>🗣️ Trust your instincts and ask for help if needed.</li>
+            <h2 style="color: #333; border-bottom: 2px solid #c9f2f5; padding-bottom: 5px;">💡 Important Women Safety Tips</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px; font-size: 16px;">🚶‍♀️ Always be aware of your surroundings.</li>
+                <li style="padding: 8px; font-size: 16px;">📱 Keep your emergency contacts handy.</li>
+                <li style="padding: 8px; font-size: 16px;">🚖 Avoid traveling alone at night.</li>
+                <li style="padding: 8px; font-size: 16px;">🔦 Carry a pepper spray or safety alarm.</li>
+                <li style="padding: 8px; font-size: 16px;">🗣️ Trust your instincts and ask for help if needed.</li>
             </ul>
         </section>
 
-        <button onclick="showEmergencyTips()">🚨 Quick Emergency Tips</button>
+        <!-- Emergency Button -->
+        <button onclick="showEmergencyTips()" 
+            style="background: linear-gradient(to right, #bbeaf6, #a1a2a3); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; display: block; margin: 20px auto;">
+            🚨 Quick Emergency Tips
+        </button>
 
+        <!-- Video Tutorials Section -->
         <section>
-            <h2>🎥 Watch These Safety Tutorials</h2>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/4Z-q-zf_tKw" frameborder="0" allowfullscreen></iframe>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/2dKWT9BOyM0" frameborder="0" allowfullscreen></iframe>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/MvJ55jEQtSM" frameborder="0" allowfullscreen></iframe>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/qSdyUgUWeQI" frameborder="0" allowfullscreen></iframe>
-            </div>
+            <h2 style="color: #333; border-bottom: 2px solid #c9f2f5; padding-bottom: 5px;">🎥 Watch These Safety Tutorials</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;">
+                <iframe width="280" height="160" src="https://www.youtube.com/embed/SNjA8HIFiOk" frameborder="0" allowfullscreen style="border-radius: 8px;"></iframe>
+                <iframe width="280" height="160" src="https://www.youtube.com/embed/J9lZ9OHdahg" frameborder="0" allowfullscreen style="border-radius: 8px;"></iframe>
+                <iframe width="280" height="160" src="https://www.youtube.com/embed/l9AGSj5BaEg" frameborder="0" allowfullscreen style="border-radius: 8px;"></iframe>
+                <iframe width="280" height="160" src="https://www.youtube.com/embed/KVpxP3ZZtAc" frameborder="0" allowfullscreen style="border-radius: 8px;"></iframe>
+            </div>            
         </section>
+
     </main>
 
-    <footer>
-        <p>With ❤️ Team Virus Vixens | Stay Safe!</p>
+    <!-- Footer -->
+    <footer style="background: #222; color: white; padding: 10px; margin-top: 20px;">
+        <p>With ❤️ ChaoticUS | Stay Safe!</p>
     </footer>
+
+    <script>
+        function showEmergencyTips() {
+            alert("🚨 Emergency Tips:\n\n📞 Call emergency helpline immediately.\n📍 Share your live location with trusted contacts.\n🔊 Use a loud safety alarm to attract attention.");
+        }
+    </script>
+
 </body>
 </html>

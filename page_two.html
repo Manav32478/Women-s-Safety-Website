@@ -9,19 +9,36 @@
   <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
+       #menubar {
+      background: #444;
+      padding: 10px;
+    }
+    #menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    #menu li {
+      margin: 0 15px;
+    }
+    #menu li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+      transition: 0.3s;
+    }
+    #menu li a:hover {
+      background: #ff6f61;
+      border-radius: 5px;
+      padding: 10px;
+    }
     #map {
       height: 100%;
     }
-  
-        #menubar{
-        width:1600px !important;
-      }
-
-      ul#menu{
-        transform: translatex(30%) !important;
-      }
-    /* Optional: Makes the sample page fill the window. */
-    html,
+    /* html, */
     body {
       height: 100%;
       margin: 0;
@@ -31,16 +48,16 @@
 </head>
 
 <body>
-<div id="menubar">
-        <ul id="menu">
-          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="index.html">Welcome Page</a></li>
-          <li><a href="page_one.html">Navigation</a></li>
-          <li class="selected"><a href="page_two.html">Safe Zone</a></li>
-          <li ><a href="page_three.html">Guardians</a></li>
-          <li><a href="page_four.html">Safety Alarm</a></li>
-        </ul>
-      </div>
+  <div id="menubar">
+    <ul id="menu">
+      <li class="selected"><a href="index.html">Welcome Page</a></li>
+      <li><a href="page_one.html">Navigation</a></li>
+      <li><a href="page_two.html">Safe Zone</a></li>
+      <li><a href="page_three.html">Guardians</a></li>
+      <li><a href="page_four.html">Safety Alarm</a></li>
+      <li><a href="stips.html">Safety Tips & Videos</a></li>
+    </ul>
+  </div>
       <div id="map"></div>
       <script>
         var map;
@@ -121,7 +138,7 @@
               fillOpacity: 0.35,
               map,
               center: redZones[i],
-              radius: 5000 // Radius in meters
+              radius: 50000 // Radius in meters
             });
           }
         }

@@ -1,98 +1,182 @@
+<!-- Updated Code with Side-by-Side Buttons -->
 <!DOCTYPE html>
-<html class="gr__html5webtemplates_co_uk"><head>
+<html>
+<head>
   <title>Women Safety</title>
   <meta name="description" content="website description">
   <meta name="keywords" content="website keywords, website keywords">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" type="text/css" href="style.css" title="style">
+  <style>
+    #menubar {
+      background: #444;
+      padding: 10px;
+    }
+    #menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    #menu li {
+      margin: 0 15px;
+    }
+    #menu li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+      transition: 0.3s;
+    }
+    #menu li a:hover {
+      background: #ff6f61;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #bbeaf6, #a1a2a3);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    
+    /* Page Content */
+    .container {
+      max-width: 400px;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .button {
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .call-button {
+      width: 100%;
+      background: linear-gradient(45deg, #e11919, #c62828);
+      margin-bottom: 10px;
+    }
+
+    .message-button {
+      background: linear-gradient(45deg, #4CAF50, #2E7D32);
+    }
+
+    .clear-button {
+      background: linear-gradient(45deg, #e11919, #c62828);
+    }
+
+    .button:hover {
+      opacity: 0.8;
+    }
+
+    .input-field {
+      width: calc(100% - 20px);
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 2px solid #c9f2f5;
+      font-size: 16px;
+      text-align: center;
+      background: #fff;
+      outline: none;
+      transition: 0.3s;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .input-field:focus {
+      border-color: #ff512f;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    textarea.input-field {
+      resize: none;
+      height: 80px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .button-group .button {
+      width: 48%;
+    }
+  </style>
 </head>
-<?php include 'includes/call1.php';?>
-<?php include 'includes/call2.php';?>
-<?php include 'includes/call3.php';?>
-
-<script type="text/javascript">
-function clearAllFields1(){
-    document.getElementById("number1").value="";
-    document.getElementById("textMessage1").value="Please save me. I am in Danger";
-}
-
-function setContact(number) {
-    document.getElementById("number1").value = number;
-    document.getElementById("textMessage1").value = "Please save me. I am in Danger";
-    sendMessage(number);
-}
-
-function sendMessage() {
-    let number = document.getElementById("number1").value;
-    alert("Message sent to " + number + " successfully!");
-}
-
-function callEmergency() {
-    window.location.href = "tel:6352666365";
-}
-</script>
 <body>
-  <div id="main">
-    <div id="header">
-      <div id="logo">
-        <div id="logo_text">
-          <h1><a href="#"><span class="logo_colour"> Hey!!! &nbsp</span><span class="logo_colour2">Making Sure Your Safety</span></a></h1>
-          <h2>Take care of yourself. Many people out there love you</h2>
-        </div>
-      </div>
-      <div id="menubar">
-        <ul id="menu">
-          <li><a href="index.html">Welcome Page</a></li>
-          <li><a href="page_one.html">Navigation</a></li>
-          <li><a href="page_two.html">Safe Zone</a></li>
-          <li class="selected"><a href="page_three.html">Guardians</a></li>
-          <li><a href="page_four.html">Safety Alarm</a></li>
-        </ul>
-      </div>
-    </div>
-    <div id="site_content">
-      <div class="sidebar">
-        <h3>Hey There!!! It is always good to stay in touch with family</h3>
-        <p>Click on the name to send them a message</p>  
-        <h4 onclick="setContact('9825042341')">Papa</h4>
-        <p>Active</p>
-        <h4 onclick="setContact('7698225243')">Mummy</h4>
-        <p>Active</p>
-        <h4 onclick="setContact('7922823272')">Husband</h4>
-        <p>Silent</p>
-        <h4 onclick="setContact('7922823736')">Jahnvi</h4>
-        <p>Active</p>
-        <h4 onclick="setContact('8758538174')">Raj</h4>
-        <p>Silent</p>
-        <h4 onclick="setContact('9664842668')">Smit</h4>
-        <p>Active</p>
-        <h4 onclick="setContact('7355307053')">Aastha</h4>
-        <p>Silent</p>
-        <h4 onclick="setContact('8046800120')">Kajal</h4>
-        <p>Vibration</p>
-      </div>
-      <div id="content1">
-        <br><br>
-        <button type="button" name="callsafety" class="btn btn-outline-primary mt-3" id="btncall" onclick="callEmergency()">Call 1901</button>
-        <div class="container mt-3">
-          <form method="POST" action="#">
-            <br>
-            <label for="lblMobileNumber">Mobile Number</label>
-            <br>
-            <input type="tel" name="userMobile1" class="form-control" id="number1" value="8884014669" placeholder="8884014669" required pattern="[789][0-9]{9}">
-            <br>
-            <label for="lblMessage">Message</label><br>
-            <textarea class="form-control" name="userMessage1" required id="textMessage1" rows="3" placeholder="Please save me. I am in Danger" maxlength="158">Please save me. I am in Danger</textarea>     
-            <br>
-            <button type="button" name="SubmitButton1" class="btn btn-outline-primary mt-3" id="btnSend" onclick="sendMessage()">Send</button>
-            <button type="button" class="btn btn-outline-secondary mt-3 ml-3" onclick="clearAllFields1()">Clear</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div id="footer">
-      With Love ❤ by Team Pokemon
+
+  <div id="menubar">
+    <ul id="menu">
+      <li class="selected"><a href="index.html">Welcome Page</a></li>
+      <li><a href="page_one.html">Navigation</a></li>
+      <li><a href="page_two.html">Safe Zone</a></li>
+      <li><a href="page_three.html">Guardians</a></li>
+      <li><a href="page_four.html">Safety Alarm</a></li>
+      <li><a href="stips.html">Safety Tips & Videos</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <h1 style="color: #c9f2f5; font-size: 24px;">Hey!!! Making Sure Your Safety</h1>
+    <h2 style="color: #555; font-size: 16px;">Take care of yourself. Many people out there love you</h2>
+
+    <button onclick="callEmergency()" class="button call-button">📞 Call 1901</button>
+
+    <label for="number1" style="font-weight: bold; color: #444;">Mobile Number</label>
+    <input type="tel" id="number1" class="input-field" value="8884014669" placeholder="Enter mobile number" required pattern="[789][0-9]{9}">
+
+    <label for="textMessage1" style="font-weight: bold; color: #444;">Message</label>
+    <textarea id="textMessage1" class="input-field" placeholder="Please save me. I am in danger">Please save me. I am in danger</textarea>
+    
+    <div class="button-group">
+      <button onclick="sendMessage()" class="button message-button">📩 Send Message</button>
+      <button onclick="clearAllFields1()" class="button clear-button">🧹 Clear</button>
     </div>
   </div>
+
+  <script>
+    function clearAllFields1() {
+      document.getElementById("number1").value = "";
+      document.getElementById("textMessage1").value = "Please save me. I am in danger";
+    }
+
+    function sendMessage() {
+      let number = document.getElementById("number1").value.trim();
+      let message = document.getElementById("textMessage1").value.trim();
+
+      if (number === '' || number.length < 10) {
+        alert("Please enter a valid phone number.");
+        return;
+      }
+
+      let whatsappURL = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(message)}`;
+      window.open(whatsappURL, '_blank');
+    }
+
+    function callEmergency() {
+      window.location.href = "tel:6352666365";
+    }
+  </script>
 </body>
 </html>
