@@ -41,54 +41,90 @@
           <li><a href="page_four.html">Safety Alarm</a></li>
         </ul>
       </div>
-  <div id="map"></div>
-  <script>
-    var map;
-    var service;
-    var infowindow;
+      <div id="map"></div>
+      <script>
+        var map;
+        var infowindow;
+        var redZones = [
+      // India
+      { lat: 28.704060, lng: 77.102493 }, // Delhi
+      { lat: 19.076090, lng: 72.877426 }, // Mumbai
+      { lat: 12.971599, lng: 77.594566 }, // Bangalore
+      { lat: 22.572645, lng: 88.363892 }, // Kolkata
+      { lat: 13.082680, lng: 80.270718 }, // Chennai
+      { lat: 26.912434, lng: 75.787271 }, // Jaipur
+      { lat: 17.385044, lng: 78.486671 }, // Hyderabad
+      { lat: 23.022505, lng: 72.571362 }, // Ahmedabad
+      { lat: 21.170240, lng: 72.831062 }, // Surat
+      { lat: 18.520430, lng: 73.856743 }, // Pune
+      { lat: 26.846695, lng: 80.946167 }, // Lucknow
+      { lat: 25.317644, lng: 82.973915 }, // Varanasi
+      { lat: 22.719568, lng: 75.857727 }, // Indore
+      { lat: 30.733315, lng: 76.779419 }, // Chandigarh
+      { lat: 15.299326, lng: 74.123996 }, // Goa
+      // Pakistan
+      { lat: 31.520370, lng: 74.358749 }, // Lahore
+      { lat: 24.860735, lng: 67.001137 }, // Karachi
+      { lat: 33.684422, lng: 73.047882 }, // Islamabad
+      // Afghanistan
+      { lat: 34.555349, lng: 69.207486 }, // Kabul
+      // Myanmar
+      { lat: 16.840939, lng: 96.173526 }, // Yangon
+      // Iran
+      { lat: 35.689198, lng: 51.388974 }, // Tehran
+      // China
+      { lat: 39.904202, lng: 116.407394 }, // Beijing
+      { lat: 31.230391, lng: 121.473701 }, // Shanghai
+      // Saudi Arabia
+      { lat: 24.713552, lng: 46.675297 }, // Riyadh
+      { lat: 21.389082, lng: 39.857912 }, // Mecca
+      // Egypt
+      { lat: 30.044420, lng: 31.235712 }, // Cairo
+      // Mongolia
+      { lat: 47.886399, lng: 106.905744 }, // Ulaanbaatar
+      // Russia
+      { lat: 55.755825, lng: 37.617298 }, // Moscow
+      { lat: 59.934280, lng: 30.335099 }, // Saint Petersburg
+    ];
 
-    function initMap() {
-      var pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
-      infowindow = new google.maps.InfoWindow();
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: pyrmont,
-        zoom: 15
-      });
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pyrmont = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          //pyrmont = new google.maps.LatLng(pos.lat, pos.lng);
-          infowindow.setPosition(pyrmont);
-          infowindow.setContent('Location found.');
-          infowindow.open(map);
-          map.setCenter(pyrmont);
-
-          var request = {
-            location: pyrmont,
-            radius: '500',
-            query: 'police station',
-            fields: ['name', 'formatted_address', 'international_phone_number', 'geometry']
-          };
-
-          service = new google.maps.places.PlacesService(map);
-          service.textSearch(request, callback);
-
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-
-
-
-
-    }
+    
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 20.5937, lng: 78.9629 }, // Centered in India
+            zoom: 5
+          });
+          
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              var userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+              map.setCenter(userLocation);
+              new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: "Your Location",
+                icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+              });
+            }, function() {
+              console.log("Geolocation failed.");
+            });
+          }
+    
+          for (var i = 0; i < redZones.length; i++) {
+            new google.maps.Circle({
+              strokeColor: "#FF0000",
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: "#FF0000",
+              fillOpacity: 0.35,
+              map,
+              center: redZones[i],
+              radius: 5000 // Radius in meters
+            });
+          }
+        }
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       infoWindow.setPosition(pos);
@@ -131,4 +167,3 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&libraries=places&callback=initMap" async defer></script>
 </body>
 
-</html>
