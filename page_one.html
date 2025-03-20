@@ -4,25 +4,21 @@
     <title>Women Safety</title>
     <link rel="stylesheet" type="text/css" href="style.css" title="style">
     <style>
-      #menubar{
-        width:1600px !important;
+      #menubar {
+        width: 1600px !important;
       }
-      ul#menu{
-        transform: translatex(30%) !important;
+      ul#menu {
+        transform: translateX(30%) !important;
       }
       #right-panel {
-        font-family: 'Roboto','sans-serif';
-        
+        font-family: 'Roboto', 'sans-serif';
       }
-
       #right-panel select, #right-panel input {
         font-size: 15px;
       }
-
       #right-panel select {
         width: 100%;
       }
-
       #right-panel i {
         font-size: 12px;
       }
@@ -42,29 +38,89 @@
       #output {
         font-size: 11px;
       }
+      #phone-number {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
     </style>
   </head>
   <body>
-<div id="menubar">
-        <ul id="menu">
-          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="index.html">Welcome Page</a></li>
-          <li><a href="page_one.html">Navigation</a></li>
-          <li><a href="page_two.html">Safe Zone</a></li>
-          <li class="selected"><a href="page_three.html">Guardians</a></li>
-          <li><a href="page_four.html">Safety Alarm</a></li>
-        </ul>
-      </div>
+    <div id="menubar">
+      <ul id="menu">
+        <li><a href="index.html">Welcome Page</a></li>
+        <li class="selected"><a href="page_one.html">Navigation</a></li>
+        <li><a href="page_two.html">Safe Zone</a></li>
+        <li><a href="page_three.html">Guardians</a></li>
+        <li><a href="page_four.html">Safety Alarm</a></li>
+      </ul>
+    </div>
     <div id="right-panel">
-      <div id="inputs">
-      </div>
-      <div>
-        <strong>Results</strong>
-      </div>
+      <div id="inputs"></div>
+      <div><strong>Results</strong></div>
       <div id="output"></div>
+      <h1>Geolocation with Google Maps</h1>
+<h2>Click the button to display your location on the map.</h2>
+<button onclick="getLocation()">Show My Location</button>
+<h4 id="status"></h4>
+      </div>
+
+<!-- Map container -->
+<h3 id="map"></h3>
+      <input type="text" id="phone-number" placeholder="Enter phone number (with country code)">
+      <button onclick="shareLocation()">Share Location</button>
     </div>
     <div id="map"></div>
     <script>
+       const status = document.getElementById("status");
+  const mapContainer = document.getElementById("map");
+  let map, marker;
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      status.textContent = "Geolocation is not supported by this browser.";
+    }
+  }
+
+  function showPosition(position) {
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+    const latLng = new google.maps.LatLng(lat, lng);
+
+    // Initialize the map
+    map = new google.maps.Map(mapContainer, {
+      center: latLng,
+      zoom: 15
+    });
+
+    // Place a marker at the user's location
+    marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: "You are here!"
+    });
+
+    status.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
+  }
+
+  function showError(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        status.textContent = "User denied the request for Geolocation.";
+        break;
+      case error.POSITION_UNAVAILABLE:
+        status.textContent = "Location information is unavailable.";
+        break;
+      case error.TIMEOUT:
+        status.textContent = "The request to get user location timed out.";
+        break;
+      case error.UNKNOWN_ERROR:
+        status.textContent = "An unknown error occurred.";
+        break;
+    }
+  }
       function initMap() {
         var bounds = new google.maps.LatLngBounds;
         var markersArray = [];
@@ -138,9 +194,25 @@
         }
         markersArray = [];
       }
+
+      function shareLocation() {
+        var phoneNumber = document.getElementById('phone-number').value.trim();
+        if (phoneNumber === '') {
+          alert('Please enter a phone number.');
+          return;
+        }
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var message = 'My current location: https://www.google.com/maps?q=' + latitude + ',' + longitude;
+            window.open('https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + encodeURIComponent(message));
+          });
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      }
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap">
-    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap"></script>
   </body>
 </html>
