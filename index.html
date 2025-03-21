@@ -17,9 +17,14 @@
             min-height: 100vh;
         }
         
+        /* Fixed Menubar */
         #menubar {
             background: #444;
             padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
         
         #menu {
@@ -55,6 +60,7 @@
             text-align: center;
             font-size: 22px;
             font-weight: bold;
+            margin-top: 50px; /* Adjust to prevent overlap with menubar */
         }
 
         /* Main Content Layout */
@@ -62,9 +68,9 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 50px 20px;
+            padding: 80px 20px; /* Added top padding to prevent overlap */
             gap: 20px;
-            flex-grow: 1; /* Allows content to expand and push footer to bottom */
+            flex-grow: 1;
         }
 
         /* News Section */
@@ -86,7 +92,6 @@
             overflow: hidden;
         }
 
-        /* Static Image Above News */
         .news-image {
             width: 100%;
             height: 250px;
@@ -146,7 +151,6 @@
 </head>
 <body>
 
-    <div id="header">Hey!!! Making Sure Your Safety</div>
     <div id="menubar">
         <ul id="menu">
             <li class="selected"><a href="index.html">Welcome Page</a></li>
@@ -157,6 +161,8 @@
             <li><a href="stips.html">Safety Tips & Videos</a></li>
         </ul>
     </div>
+
+    <div id="header">Hey!!! Making Sure Your Safety</div>
 
     <div id="site_content">
         <!-- News Section with Static Image -->
