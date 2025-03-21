@@ -12,33 +12,42 @@
             margin: 0;
             padding: 0;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
+        
         #menubar {
-      background: #444;
-      padding: 10px;
-    }
-    #menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-    }
-    #menu li {
-      margin: 0 15px;
-    }
-    #menu li a {
-      text-decoration: none;
-      color: white;
-      font-size: 16px;
-      padding: 10px;
-      transition: 0.3s;
-    }
-    #menu li a:hover {
-      background: #ff6f61;
-      border-radius: 5px;
-      padding: 10px;
-    }
+            background: #444;
+            padding: 10px;
+        }
+        
+        #menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        #menu li {
+            margin: 0 15px;
+        }
+        
+        #menu li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            transition: 0.3s;
+        }
+        
+        #menu li a:hover {
+            background: #ff6f61;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        
         #header {
             background: linear-gradient(45deg, #c2f0fa, #e9906430);
             padding: 20px;
@@ -55,12 +64,13 @@
             align-items: flex-start;
             padding: 50px 20px;
             gap: 20px;
+            flex-grow: 1; /* Allows content to expand and push footer to bottom */
         }
 
         /* News Section */
         .news-container {
             width: 30%;
-            height: 350px; /* Increased height to fit image */
+            height: 350px;
             background: #4b4a4a;
             color: white;
             border-radius: 10px;
@@ -116,11 +126,15 @@
             text-align: left;
         }
 
+        /* Fixed Footer */
         #footer {
-            margin-top: 20px;
             background: #222;
             color: white;
             padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 
         img {
@@ -132,30 +146,27 @@
 </head>
 <body>
 
-
-
-  
-  <div id="header">Hey!!! Making Sure Your Safety</div>
-  <div id="menubar">
-    <ul id="menu">
-      <li class="selected"><a href="index.html">Welcome Page</a></li>
-      <li><a href="page_one.html">Navigation</a></li>
-      <li><a href="page_two.html">Safe Zone</a></li>
-      <li><a href="page_three.html">Guardians</a></li>
-      <li><a href="page_four.html">Safety Alarm</a></li>
-      <li><a href="stips.html">Safety Tips & Videos</a></li>
-    </ul>
-  </div>
+    <div id="header">Hey!!! Making Sure Your Safety</div>
+    <div id="menubar">
+        <ul id="menu">
+            <li class="selected"><a href="index.html">Welcome Page</a></li>
+            <li><a href="page_one.html">Navigation</a></li>
+            <li><a href="page_two.html">Safe Zone</a></li>
+            <li><a href="page_three.html">Guardians</a></li>
+            <li><a href="page_four.html">Safety Alarm</a></li>
+            <li><a href="stips.html">Safety Tips & Videos</a></li>
+        </ul>
+    </div>
 
     <div id="site_content">
         <!-- News Section with Static Image -->
         <div class="news-container">
-            <img class="news-image" src="news-image.jpg" alt="Breaking News">
+            <img class="news-image" src="images/news-image.jpg" alt="Breaking News">
             <div class="news-wrapper">
                 <div class="news-item active">🚨 Unsafe Workspace: Workplace harassment is a serious issue.</div>
                 <div class="news-item">👩‍💻 Shivani Verma, a software engineer, took legal action.</div>
                 <div class="news-item">💪 Say No to quitting jobs! Stand against workplace violence.</div>
-                <div class="news-item">⚖️ Indian Government ensures strict punishment for culprits.</div>
+                <div class="news-item">⚖ Indian Government ensures strict punishment for culprits.</div>
             </div>
         </div>
 
@@ -163,12 +174,12 @@
         <div id="content">
             <h1>Be Safe</h1>
             <p>India has been ranked as the most dangerous country for women according to a Thomson Reuters Foundation poll.</p>
-            <img src="wallpaper.jpg" alt="BestPic">
-            <a href="stips.html"><img src="Safety-Tips-For-Woman.jpg" alt="BestPic"></a>
+            <img src="images/women.jpeg.jpg" alt="BestPic">
+            <a href="stips.html"><img src="images/Safety-Tips-For-Woman.jpg" alt="BestPic"></a>
         </div>
     </div>
 
-    <div id="footer">With Love ❤️ ChaoticUS</div>
+    <div id="footer">With Love ❤ ChaoticUS</div>
 
     <script>
         let currentIndex = 0;
