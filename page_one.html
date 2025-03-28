@@ -1,164 +1,260 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Women Safety</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    #menubar {
-      width: 100%;
-      background: #444;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Safety Website</title>
+    <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script> 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-    #menu {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-    }
+        /* MAIN BODY LAYOUT */
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
 
-    #menu li {
-      display: inline-block;
-      margin: 0;
-    }
+        /* HEADER */
+        .header {
+            background-color: #a5a4a4;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-    #menu li a {
-      display: block;
-      padding: 15px 20px;
-      color: white;
-      font-size: 16px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+        .header img {
+            height: 60px;
+            mix-blend-mode: multiply;
+        }
 
-    #menu li a:hover, #menu li.selected a {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 5px;
-    }
-  </style>
+        .header-text {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #2c3e50;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            display: flex;
+            flex-grow: 1;
+            padding: 100px 20px 60px;
+            margin-left: 250px; /* To push content right due to sidebar */
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            height: calc(100vh - 80px);
+            width: 250px;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar ul li {
+            padding: 12px;
+            border-bottom: 1px solid #495057;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #495057;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1; /* Takes up all available space */
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .main-content h2 {
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        .main-content input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* MAP */
+        #map {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* BUTTON STYLING */
+        .btn {
+            background: linear-gradient(45deg, #e11919, #c62828);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        /* Selected Menu Item */
+.sidebar ul li.selected {
+    background-color: #495057; /* Blue highlight */
+    border-radius: 5px;
+}
+
+.sidebar ul li.selected a {
+    color: white; /* Ensures text remains visible */
+    font-weight: bold;
+}
+
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa;">
-<br><br>
-  <!-- Header -->
-  <div style="background: linear-gradient(to right, #bbeaf6, #a1a2a3); padding: 20px; color: white; text-align: center;">
-    <h1 style="margin: 0;">Women Safety</h1>
-  </div>
+<body>
 
-  <!-- Navigation Bar -->
-  <div id="menubar">
-    <ul id="menu">
-      <li><a href="index.html">Welcome Page</a></li>
-      <li class="selected"><a href="page_one.html">Navigation</a></li>
-      <li><a href="page_two.html">Safe Zone</a></li>
-      <li><a href="page_three.html">Guardians</a></li>
-      <li><a href="page_four.html">Safety Alarm</a></li>
-      <li><a href="stips.html">Safety Tips & Videos</a></li>
-    </ul>
-  </div>
-
-  <!-- Container for Buttons & Input -->
-  <div style="max-width: 600px; background: white; padding: 20px; margin: 20px auto; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); text-align: center;">
-
-    <h2 style="color: #333;">Geolocation with Google Maps</h2>
-    <p>Click the button to display your location on the map.</p>
-
-    <button onclick="getLocation()" style="background: linear-gradient(45deg, #e11919, #c62828); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">Show My Location</button>
-
-    <h4 id="status" style="margin-top: 10px; color: #555;"></h4>
-
-    <div style="margin-top: 20px;">
-      <input type="text" id="phone-number" placeholder="Enter phone number (with country code)"
-        style="width: 250px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; margin-bottom: 10px;">
-      <button onclick="shareLocation()" style="background: #28a745; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">Share Location</button>
+    <!-- HEADER -->
+    <div class="header">
+        <img src="logo.png" alt="Gujarat Government Logo">
+        <div class="header-text">Women's Safety Website</div>
+        <img src="safety.webp" alt="Women's Safety Symbol">
     </div>
 
-  </div>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Welcome Page</a></li>
+            <li class="selected"><a href="page_one.html"><i class="fas fa-map-marker-alt"></i>Live Location</a></li>
+            <li><a href="page_two.html"><i class="fas fa-shield-alt"></i> Safe Zone</a></li>
+            <li><a href="page_three.html"><i class="fas fa-user-friends"></i> Guardians</a></li>
+            <li><a href="page_four.html"><i class="fas fa-bell"></i> Safety Alarm</a></li>
+            <li><a href="stips.html"><i class="fas fa-video"></i> Safety Tips & Videos</a></li>
+        </ul>
+    </div>
 
-  <!-- Map Display (Full-Width) -->
-  <div id="map" style="width: 100%; height: 500px; border-top: 2px solid #ddd;"></div>
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="main-content">
+            <h2>Live Location with Google Maps</h2>
+            <button class="btn" onclick="getLocation()">Show My Location</button>
+            <h4 id="status"></h4>
+            <input type="text" id="phone-number" placeholder="Enter phone number (with country code)">
+            <button class="btn" onclick="shareLocation()">Share Location</button>
+            <div id="map"></div>
+        </div>
+    </div>
+    <script>
+        const status = document.getElementById("status");
+        const mapContainer = document.getElementById("map");
+        let map, marker;
 
-  <!-- Footer -->
-  <div style="background: #222; color: white; padding: 10px; text-align: center;">
-    Made with ❤️ by ChaoticUS
-  </div>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError, {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                });
+            } else {
+                status.textContent = "Geolocation is not supported by this browser.";
+            }
+        }
 
-  <script>
-    const status = document.getElementById("status");
-    const mapContainer = document.getElementById("map");
-    let map, marker;
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const latLng = new google.maps.LatLng(lat, lng);
 
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-      } else {
-        status.textContent = "Geolocation is not supported by this browser.";
-      }
-    }
+            map = new google.maps.Map(mapContainer, {
+                center: latLng,
+                zoom: 15
+            });
 
-    function showPosition(position) {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      const latLng = new google.maps.LatLng(lat, lng);
+            marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                title: "You are here!"
+            });
 
-      // Initialize the map
-      map = new google.maps.Map(mapContainer, {
-        center: latLng,
-        zoom: 15
-      });
+            status.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
+        }
 
-      // Place a marker at the user's location
-      marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        title: "You are here!"
-      });
+        function showError(error) {
+            status.textContent = "Unable to retrieve location.";
+        }
 
-      status.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
-    }
+        function shareLocation() {
+            var phoneNumber = document.getElementById('phone-number').value.trim();
+            if (phoneNumber === '') {
+                alert('Please enter a phone number.');
+                return;
+            }
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var message = `My location: https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
+                window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`);
+            });
+        }
 
-    function showError(error) {
-      switch(error.code) {
-        case error.PERMISSION_DENIED:
-          status.textContent = "User denied the request for Geolocation.";
-          break;
-        case error.POSITION_UNAVAILABLE:
-          status.textContent = "Location information is unavailable.";
-          break;
-        case error.TIMEOUT:
-          status.textContent = "The request to get user location timed out.";
-          break;
-        case error.UNKNOWN_ERROR:
-          status.textContent = "An unknown error occurred.";
-          break;
-      }
-    }
+        function initMap() {}
+    </script>
 
-    function shareLocation() {
-      var phoneNumber = document.getElementById('phone-number').value.trim();
-      if (phoneNumber === '') {
-        alert('Please enter a phone number.');
-        return;
-      }
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var latitude = position.coords.latitude;
-          var longitude = position.coords.longitude;
-          var message = 'My current location: https://www.google.com/maps?q=' + latitude + ',' + longitude;
-          window.open('https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + encodeURIComponent(message));
-        });
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
-    }
-  </script>
-
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap"></script>
 
 </body>
 </html>
