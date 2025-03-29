@@ -226,6 +226,144 @@
     color: white; /* Ensures text remains visible */
     font-weight: bold;
 }
+.profile-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .profile-picture {
+    width: 65px;
+    height: 50px;
+    border-radius: 50%; /* Ensures it remains a perfect circle */
+    object-fit: cover;
+    border: 2px solid white;
+    display: block;
+}
+
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #343a40;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            width: 150px;
+            
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #495057;
+            color: white;
+        }
+
+        /* POPUP STYLES */
+        /* POPUP STYLES - Gmail Style */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    text-align: center;
+}
+
+/* Title */
+.popup h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: #202124;
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.popup p {
+    font-size: 14px;
+    color: #5f6368;
+    margin-bottom: 20px;
+}
+
+/* Input fields */
+.popup input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #dadce0;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Google-style button */
+.popup button {
+    width: 100%;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.popup button:hover {
+    background-color: #1765cc;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #5f6368;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #d93025;
+}
+
+/* Profile Image Input Styling */
+.popup input[type="file"] {
+    padding: 10px;
+    border: none;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
 
     </style>
 </head>
@@ -235,7 +373,50 @@
         <img src="logo.png" alt="Gujarat Government Logo" class="logo">
         <div class="header-text">Women's Safety Website</div>
         <img src="safety.webp" alt="Women's Safety Symbol" class="safety-image">
+        <div class="profile-container" onclick="toggleDropdown()">
+            <img id="profilePic" src="profile.jpg" alt="Profile Picture" class="profile-picture">
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" onclick="openPopup('loginPopup')">Sign in</a>
+                <a href="#" onclick="openPopup('registerPopup')">Sign up</a>
+                <a href="#" onclick="openPopup('editProfilePopup')">Profile</a>
+            </div>
+        </div>
     </div>
+    
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    
+    <!-- LOGIN POPUP -->
+    <div class="popup" id="loginPopup">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button onclick="loginUser()">Sign in</button>
+    </div>
+    
+    <!-- REGISTER POPUP -->
+    <div class="popup" id="registerPopup">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2>Register</h2>
+        <input type="text" placeholder="Full Name">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button onclick="registerUser()">Sign up</button>
+    </div>
+    
+    <!-- EDIT PROFILE POPUP -->
+    <div class="popup" id="editProfilePopup">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2>Edit Profile</h2>
+        <input type="text" placeholder="Full Name">
+        <input type="file" id="profileImageInput">
+        <button onclick="updateProfilePicture()">Save</button>
+    </div>
+    
+    </div>
+    <!-- PROFILE SECTION -->
+    
 
     <!-- SIDEBAR -->
     <div class="sidebar">
@@ -256,17 +437,17 @@
         <p>🔹 Women's safety is a **fundamental right**, and we must work together to create a secure environment.</p>
         <p>🔹 Violence and harassment can occur anywhere, making **awareness and preparedness** essential.</p>
         <p>🔹 Governments, communities, and individuals all play a **crucial role** in ensuring women's safety.</p>
-    <hr>
-        <h2>🔹 Slogan on Women’s Empowerment</h2>
+    
+        <h3>🔹 Common Safety Concerns</h3>
         <ul class="safety-tips">
-            <li>📍 Empower Women, Empower Humanity</li>
-            <li>🏠 Equality for Women is Progress for All</li>
-            <li>💻 Strong Women, Strong World</li>
-            <li>👩‍💼 Women’s Rights are Human Rights</li>
-            <li>🚕 Her Voice, Her Strength</li>
+            <li>📍 Harassment in public places</li>
+            <li>🏠 Domestic violence and abuse</li>
+            <li>💻 Cyberstalking and online threats</li>
+            <li>👩‍💼 Workplace harassment and discrimination</li>
+            <li>🚕 Unsafe public transportation</li>
         </ul>
-    <hr>
-        <h2>🔹 Practical Safety Tips</h2>
+    
+        <h3>🔹 Practical Safety Tips</h3>
         <ul class="safety-tips">
             <li>📲 Always share your location with a trusted contact when traveling alone.</li>
             <li>🗣 Be assertive and trust your instincts when feeling unsafe.</li>
@@ -274,8 +455,8 @@
             <li>📞 Save emergency helpline numbers on speed dial.</li>
             <li>🚦 Avoid dimly lit and isolated areas at night.</li>
         </ul>
-    <hr>
-        <h2>📊 Women's Safety in India</h2>
+    
+        <h3>📊 Women's Safety in India</h3>
         
         <p>🔴 **Violence Against Women:** <br> Over <b>4 lakh cases</b> of crimes against women were reported in 2019, including rape, dowry deaths, domestic violence, and harassment.</p>
         
@@ -288,14 +469,14 @@
         <p>🔴 **Child Marriage:** <br> Around **27% of girls** in India are married before the age of **18**, exposing them to greater risks of violence and limited opportunities.</p>
     
         <p>🔴 **Human Trafficking:** <br> India is a hotspot for human trafficking, with women and girls being exploited for **forced labor, sexual exploitation, and domestic servitude**.</p>
-    <hr>
-        <h2>📖 Education & Employment</h2>
+    
+        <h3>📖 Education & Employment</h3>
     
         <p>📚 **Literacy Gap:** <br> Only **50% of Indian women** are literate compared to **65.5% of men**. This limits access to **education and career opportunities**.</p>
     
         <p>💼 **Workforce Participation:** <br> Despite women’s contributions, the female labor force participation rate is just **23%**, with many working in the informal sector.</p>
-    <hr>
-        <h2>🌍 Social Freedom & Challenges</h2>
+    
+        <h3>🌍 Social Freedom & Challenges</h3>
     
         <p>🏙 **Urban vs. Rural Divide:** <br> In 2021, only **14.4% of parliamentary seats** were held by women, showing **underrepresentation, especially in rural areas**.</p>
     
@@ -344,5 +525,69 @@
     }
 
     setInterval(showNextNews, 2000);
+        function toggleDropdown() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        function openPopup(id) {
+            document.getElementById(id).style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closePopup() {
+            document.querySelectorAll(".popup").forEach(popup => popup.style.display = "none");
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        function updateProfilePicture() {
+            const fileInput = document.getElementById("profileImageInput");
+            if (fileInput.files.length > 0) {
+                const file = URL.createObjectURL(fileInput.files[0]);
+                document.getElementById("profilePic").src = file;
+                alert("Profile Picture Updated!");
+            }
+        }
+        function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function openPopup(id) {
+    document.getElementById(id).style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function closePopup() {
+    document.querySelectorAll(".popup").forEach(popup => popup.style.display = "none");
+    document.getElementById("overlay").style.display = "none";
+}
+
+// Function to handle login button click
+function loginUser() {
+    alert("Login Successful!");  // Placeholder alert (replace with actual login logic)
+    closePopup(); // Close the pop-up after login
+}
+
+// Function to handle register button click
+function registerUser() {
+    alert("Registration Successful!");  // Placeholder alert (replace with actual registration logic)
+    closePopup(); // Close the pop-up after registration
+}
+
+// Function to handle saving profile changes
+function updateProfilePicture() {
+    const fileInput = document.getElementById("profileImageInput");
+    if (fileInput.files.length > 0) {
+        const file = URL.createObjectURL(fileInput.files[0]);
+        document.getElementById("profilePic").src = file;
+        alert("Profile Picture Updated!");
+    }
+    closePopup(); // Close the pop-up after saving
+}
+
+// Automatically close the pop-up when clicking outside (overlay)
+document.getElementById("overlay").addEventListener("click", closePopup);
+
 </script>
 </html>
