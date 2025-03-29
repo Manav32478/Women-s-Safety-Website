@@ -3,83 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women Safety Tips</title>
+    <title>Women's Safety Website</title>
+    <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script> 
     <style>
-        #menubar {
-      width: 100%;
-      background: #444;      
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-    #menubar {
-      background: #444;
-      padding: 10px;
-    }
-    #menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-    }
-    #menu li {
-      margin: 0 15px;
-    }
-    #menu li a {
-      text-decoration: none;
-      color: white;
-      font-size: 16px;
-      padding: 10px;
-      transition: 0.3s;
-    }
-    #menu li a:hover {
-        background: linear-gradient(to right, #bbeaf6, #a1a2a3);
-      border-radius: 5px;
-      padding: 10px;
-    }
+        /* BODY LAYOUT */
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        /* HEADER */
+        .header {
+            background-color: #a5a4a4;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header img {
+            height: 60px;
+            mix-blend-mode: multiply;
+        }
+
+        .header-text {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #2c3e50;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 80px; /* Ensure it starts below the header */
+    left: 0;
+    height: calc(100vh - 80px); /* Adjust height to prevent overlap */
+    width: 250px;
+    overflow-y: auto;
+    z-index: 999; /* Keep it below the header */
+}
+
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            border-bottom: 1px solid #495057;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #495057;
+        }
+
+        .sidebar ul li.selected {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .sidebar ul li.selected a {
+            font-weight: bold;
+        }
+
+        /* MAIN CONTENT */
+        /* MAIN CONTENT */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content at the top */
+    padding: 20px;
+    margin-left: 250px; /* Prevent content from being hidden behind sidebar */
+    width: calc(100% - 250px);
+    min-height: calc(100vh - 80px); /* Ensure content does not exceed viewport */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    position: relative;
+    margin-top: 90px; /* Push content below the fixed header */
+}
+
+        /* MESSAGE */
+        .message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #d9534f;
+        }
+        .shorts-container {
+            width: 300px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .shorts-wrapper iframe {
+            width: 100%;
+            height: 350px;
+            border-radius: 10px;
+        }
+
+        /* Auto-Scroll Animation - Slower Speed */
+@keyframes scrollShorts {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
+
+/* Apply slower animation */
+.shorts-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: scrollShorts 24s linear infinite; /* Increased time for slower speed */
+}
+
+
+        /* Pause scrolling on hover */
+        .shorts-container:hover .shorts-wrapper {
+            animation-play-state: paused;
+        }
     </style>
 </head>
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; text-align: center;">
-    <div id="menubar">
-        <ul id="menu">
-          <li><a href="index.html">Welcome Page</a></li>
-          <li><a href="page_one.html">Navigation</a></li>
-          <li><a href="page_two.html">Safe Zone</a></li>
-          <li><a href="page_three.html">Guardians</a></li>
-          <li><a href="page_four.html">Safety Alarm</a></li>
-          <li class="selected"><a href="stips.html">Safety Tips & Videos</a></li>
-        </ul>
-      </div>
-    <!-- Header -->
-    <header id="header" style="background: linear-gradient(to right, #bbeaf6, #a1a2a3); color: white; padding: 20px;">
-        <br><br>
-        <h1 style="margin: 0;">Women Safety Tips & Tutorials</h1>
-        <p style="margin: 5px 0;">Your safety is our priority. Stay alert, stay safe!</p>
-        <a href="index.html" style="text-decoration: none; color: white; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 5px; display: inline-block; margin-top: 10px;">🏠 Back to Home</a>
-    </header>
+<body>
 
-    <!-- Main Container -->
-    <main style="max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); text-align: left;">
+    <!-- HEADER -->
+    <div class="header">
+        <img src="logo.png" alt="Gujarat Government Logo">
+        <div class="header-text">Women's Safety Website</div>
+        <img src="safety.webp" alt="Women's Safety Symbol">
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Welcome Page</a></li>
+            <li><a href="page_one.html"><i class="fas fa-map-marker-alt"></i> Live Location</a></li>
+            <li><a href="page_two.html"><i class="fas fa-shield-alt"></i> Safe Zones</a></li>
+            <li><a href="page_three.html"><i class="fas fa-user-friends"></i> Guardians</a></li>
+            <li><a href="page_four.html"><i class="fas fa-bell"></i> Safety Alarm</a></li>
+            <li class="selected"><a href="stips.html"><i class="fas fa-video"></i> Safety Tips & Videos</a></li>
+        </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+     <div class="container">
+    <main>
 
         <!-- Safety Tips Section -->
         <section>
             <h2 style="color: #333; border-bottom: 2px solid #c9f2f5; padding-bottom: 5px;">💡 Important Women Safety Tips</h2>
             <ul style="list-style: none; padding: 0;">
-                <li style="padding: 8px; font-size: 16px;">🚶‍♀️ Always be aware of your surroundings.</li>
+                <li style="padding: 8px; font-size: 16px;">🚶‍♀ Always be aware of your surroundings.</li>
                 <li style="padding: 8px; font-size: 16px;">📱 Keep your emergency contacts handy.</li>
                 <li style="padding: 8px; font-size: 16px;">🚖 Avoid traveling alone at night.</li>
                 <li style="padding: 8px; font-size: 16px;">🔦 Carry a pepper spray or safety alarm.</li>
-                <li style="padding: 8px; font-size: 16px;">🗣️ Trust your instincts and ask for help if needed.</li>
+                <li style="padding: 8px; font-size: 16px;">🗣 Trust your instincts and ask for help if needed.</li>
             </ul>
         </section>
 
         <!-- Emergency Button -->
         <button onclick="showEmergencyTips()" 
-            style="background: linear-gradient(to right, #bbeaf6, #a1a2a3); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; display: block; margin: 20px auto;">
+            style="background: linear-gradient(to right, #a1a2a3, #a1a2a3); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; display: block; margin: 20px auto;">
             🚨 Quick Emergency Tips
         </button>
 
@@ -94,13 +215,29 @@
             </div>            
         </section>
 
+        <!-- YouTube Shorts Auto Scrolling -->
+        <section>
+            <h2 style="color: #333; border-bottom: 2px solid #c9f2f5; padding-bottom: 5px;">📱 Trending YouTube Shorts</h2>
+            <div class="shorts-container">
+                <div class="shorts-wrapper">
+                    <iframe src="https://www.youtube.com/embed/B8NJajV6xVs" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/H2d8njlsSCQ" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/RosK9RMMdus" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/-JEBcNdxSMc" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/B8NJajV6xVs" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/H2d8njlsSCQ" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/RosK9RMMdus" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/-JEBcNdxSMc" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/B8NJajV6xVs" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/H2d8njlsSCQ" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/RosK9RMMdus" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/-JEBcNdxSMc" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
     </main>
-
-    <!-- Footer -->
-    <footer style="background: #222; color: white; padding: 10px; margin-top: 20px;">
-        <p>With ❤️ ChaoticUS | Stay Safe!</p>
-    </footer>
-
+</div>
     <script>
         function showEmergencyTips() {
             alert("🚨 Emergency Tips:\n\n📞 Call emergency helpline immediately.\n📍 Share your live location with trusted contacts.\n🔊 Use a loud safety alarm to attract attention.");
