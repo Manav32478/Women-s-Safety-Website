@@ -1,182 +1,270 @@
-<!-- Updated Code with Side-by-Side Buttons -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Women Safety</title>
-  <meta name="description" content="website description">
-  <meta name="keywords" content="website keywords, website keywords">
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <style>
-    #menubar {
-      background: #444;
-      padding: 10px;
-    }
-    #menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-    }
-    #menu li {
-      margin: 0 15px;
-    }
-    #menu li a {
-      text-decoration: none;
-      color: white;
-      font-size: 16px;
-      padding: 10px;
-      transition: 0.3s;
-    }
-    #menu li a:hover {
-      background: #ff6f61;
-      border-radius: 5px;
-      padding: 10px;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #bbeaf6, #a1a2a3);
-      color: #333;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Safety Website</title>
+    <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script> 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-    
-    /* Page Content */
-    .container {
-      max-width: 400px;
-      width: 90%;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      margin-top: 80px;
-    }
+        /* BODY LAYOUT */
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
 
-    .button {
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+        /* HEADER */
+        .header {
+            background-color: #a5a4a4;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-    .call-button {
-      width: 100%;
-      background: linear-gradient(45deg, #e11919, #c62828);
-      margin-bottom: 10px;
-    }
+        .header img {
+            height: 60px;
+            mix-blend-mode: multiply;
+        }
 
-    .message-button {
-      background: linear-gradient(45deg, #4CAF50, #2E7D32);
-    }
+        .header-text {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #2c3e50;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
 
-    .clear-button {
-      background: linear-gradient(45deg, #e11919, #c62828);
-    }
+        /* SIDEBAR */
+        .sidebar {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 80px; /* Ensure it starts below the header */
+    left: 0;
+    height: calc(100vh - 80px); /* Adjust height to prevent overlap */
+    width: 250px;
+    overflow-y: auto;
+    z-index: 999; /* Keep it below the header */
+}
 
-    .button:hover {
-      opacity: 0.8;
-    }
 
-    .input-field {
-      width: calc(100% - 20px);
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 2px solid #c9f2f5;
-      font-size: 16px;
-      text-align: center;
-      background: #fff;
-      outline: none;
-      transition: 0.3s;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-    }
+        .sidebar ul {
+            list-style-type: none;
+        }
 
-    .input-field:focus {
-      border-color: #ff512f;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+        .sidebar ul li {
+            padding: 15px;
+            border-bottom: 1px solid #495057;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s ease-in-out;
+        }
 
-    textarea.input-field {
-      resize: none;
-      height: 80px;
-    }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .button-group {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-    }
+        .sidebar ul li:hover {
+            background-color: #495057;
+        }
 
-    .button-group .button {
-      width: 48%;
-    }
-  </style>
+        .sidebar ul li.selected {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .sidebar ul li.selected a {
+            font-weight: bold;
+        }
+
+
+        /* MAIN CONTENT */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 120px 20px 20px;
+            margin-left: 250px;
+            height: calc(100vh - 80px);
+            text-align: center;
+        }
+
+        /* EMERGENCY BUTTON */
+        .button {
+            width: 60%;
+            max-width: 500px;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .call-button {
+            background: linear-gradient(45deg, #e11919, #c62828);
+        }
+
+        .message-button {
+            background: linear-gradient(45deg, #4CAF50, #2E7D32);
+        }
+
+        .clear-button {
+            background: linear-gradient(45deg, #e11919, #c62828);
+        }
+
+        .button:hover {
+            opacity: 0.8;
+        }
+
+        /* INPUT CONTAINER */
+        .input-container {
+            width: 60%;
+            max-width: 500px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+            display: block;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 2px solid #c9f2f5;
+            font-size: 18px;
+            background: #fff;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .input-field:focus {
+            border-color: #ff512f;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        textarea.input-field {
+            resize: none;
+            height: 100px;
+        }
+
+        /* BUTTON GROUP */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-group .button {
+            width: 48%;
+        }
+    </style>
 </head>
 <body>
 
-  <div id="menubar">
-    <ul id="menu">
-      <li class="selected"><a href="index.html">Welcome Page</a></li>
-      <li><a href="page_one.html">Navigation</a></li>
-      <li><a href="page_two.html">Safe Zone</a></li>
-      <li><a href="page_three.html">Guardians</a></li>
-      <li><a href="page_four.html">Safety Alarm</a></li>
-      <li><a href="stips.html">Safety Tips & Videos</a></li>
-    </ul>
-  </div>
-
-  <div class="container">
-    <h1 style="color: #c9f2f5; font-size: 24px;">Hey!!! Making Sure Your Safety</h1>
-    <h2 style="color: #555; font-size: 16px;">Take care of yourself. Many people out there love you</h2>
-
-    <button onclick="callEmergency()" class="button call-button">📞 Call 181</button>
-
-    <label for="number1" style="font-weight: bold; color: #444;">Mobile Number</label>
-    <input type="tel" id="number1" class="input-field"  placeholder="Enter mobile number" required pattern="[789][0-9]{9}">
-
-    <label for="textMessage1" style="font-weight: bold; color: #444;">Message</label>
-    <textarea id="textMessage1" class="input-field" placeholder="Please save me. I am in danger">Please save me. I am in danger</textarea>
-    
-    <div class="button-group">
-      <button onclick="sendMessage()" class="button message-button">📩 Send Message</button>
-      <button onclick="clearAllFields1()" class="button clear-button">🧹 Clear</button>
+    <!-- HEADER -->
+    <div class="header">
+        <img src="logo.png" alt="Gujarat Government Logo">
+        <div class="header-text">Women's Safety Website</div>
+        <img src="safety.webp" alt="Women's Safety Symbol">
     </div>
-  </div>
 
-  <script>
-    function clearAllFields1() {
-      document.getElementById("number1").value = "";
-      document.getElementById("textMessage1").value = "Please save me. I am in danger";
-    }
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Welcome Page</a></li>
+            <li><a href="page_one.html"><i class="fas fa-map-marker-alt"></i> Live Location</a></li>
+            <li><a href="page_two.html"><i class="fas fa-shield-alt"></i> Safe Zones</a></li>
+            <li class="selected"><a href="page_three.html"><i class="fas fa-user-friends"></i> Guardians</a></li>
+            <li><a href="page_four.html"><i class="fas fa-bell"></i> Safety Alarm</a></li>
+            <li><a href="stips.html"><i class="fas fa-video"></i> Safety Tips & Videos</a></li>
+        </ul>
+    </div>
 
-    function sendMessage() {
-      let number = document.getElementById("number1").value.trim();
-      let message = document.getElementById("textMessage1").value.trim();
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <button onclick="callEmergency()" class="button call-button">📞 Call 181</button>
+        
+        <div class="input-container">
+            <label for="number1">Mobile Number</label>
+            <input type="tel" id="number1" class="input-field" placeholder="Enter mobile number" required>
 
-      if (number === '' || number.length < 10) {
-        alert("Please enter a valid phone number.");
-        return;
-      }
+            <label for="textMessage1">Message</label>
+            <textarea id="textMessage1" class="input-field">Please save me. I am in danger</textarea>
 
-      let whatsappURL = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(message)}`;
-      window.open(whatsappURL, '_blank');
-    }
+            <div class="button-group">
+                <button onclick="sendMessage()" class="button message-button">📩 Send Message</button>
+                <button onclick="clearAllFields1()" class="button clear-button">🧹 Clear</button>
+            </div>
+        </div>
+    </div>
 
-    function callEmergency() {
-      window.location.href = "tel:181";
-    }
-  </script>
+    <script>
+        function clearAllFields1() {
+          document.getElementById("number1").value = "";
+          document.getElementById("textMessage1").value = "Please save me. I am in danger";
+        }
+    
+        function sendMessage() {
+          let number = document.getElementById("number1").value.trim();
+          let message = document.getElementById("textMessage1").value.trim();
+    
+          if (number === '' || number.length < 10) {
+            alert("Please enter a valid phone number.");
+            return;
+          }
+    
+          // ✅ Fixed: Corrected backticks (`) instead of incorrect syntax
+          let whatsappURL = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(message)}`;
+          window.open(whatsappURL, '_blank');
+        }
+    
+        function callEmergency() {
+          window.location.href = "tel:181"; // ✅ Fixed emergency number to match the button
+        }
+      </script>
 </body>
 </html>
