@@ -3,80 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women Safety - Latest News</title>
+    <title>Women's Safety Website</title>
+    <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script> 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #bbeaf6, #a1a2a3);
-            color: #333;
+        
+        * {
             margin: 0;
             padding: 0;
-            text-align: center;
-        }
-        #menubar {
-      background: #444;
-      padding: 10px;
-    }
-    #menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-    }
-    #menu li {
-      margin: 0 15px;
-    }
-    #menu li a {
-      text-decoration: none;
-      color: white;
-      font-size: 16px;
-      padding: 10px;
-      transition: 0.3s;
-    }
-    #menu li a:hover {
-      background: #ff6f61;
-      border-radius: 5px;
-      padding: 10px;
-    }
-        #header {
-            background: linear-gradient(45deg, #c2f0fa, #e9906430);
-            padding: 20px;
-            color: white;
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
-        /* Main Content Layout */
-        #site_content {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 50px 20px;
-            gap: 20px;
-        }
-
-        /* News Section */
-        .news-container {
-            width: 30%;
-            height: 350px; /* Increased height to fit image */
-            background: #4b4a4a;
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        body {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            font-weight: bold;
-            font-size: 20px;
-            padding: 15px;
+            height: 100vh;
+            background-color: #f8f9fa;
             position: relative;
+        }
+
+        /* HEADER */
+        /* HEADER */
+.header {
+    background-color: #a5a4a4;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header img {
+    height: 60px;
+    mix-blend-mode: multiply;
+}
+
+.header-text {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    color: #2c3e50; /* Dark color for a sophisticated look */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+}
+
+        /* SIDEBAR */
+        .sidebar {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 80px; /* Ensure it starts below the header */
+    left: 0;
+    height: calc(100vh - 80px); /* Adjust height to prevent overlap */
+    width: 250px;
+    overflow-y: auto;
+    z-index: 999; /* Keep it below the header */
+}
+
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            border-bottom: 1px solid #495057;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #495057;
+        }
+
+        .sidebar ul li.selected {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .sidebar ul li.selected a {
+            font-weight: bold;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #ebebea;
+            margin-left: 250px;
+            margin-right: 250px;
+            margin-top: 80px;
+            overflow-y: auto;
+            height: calc(100vh - 80px);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h2, h3 {
+            color: #d63384;
+            margin-bottom: 15px;
+        }
+
+        .main-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .safety-tips {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .safety-tips li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        /* NEWS PANEL */
+        .news-panel {
+            width: 250px;
+            background-color: #343a40; /* Same as sidebar */
+            color: white; /* White text like sidebar */
+            box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            position: fixed;
+            right: 0;
+            top: 80px;
+            bottom: 0;
+            height: calc(100vh - 80px);
             overflow: hidden;
         }
 
-        /* Static Image Above News */
+        .news-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffc107; /* Highlighted color */
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* News Scrolling */
+        .news-container {
+            height: 450px; /* Fixed height for scrolling */
+            overflow: hidden;
+            position: relative;
+        }
+        .news-item {
+    font-size: 14px;
+    padding: 12px;
+    border-bottom: 1px solid #495057;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+/* When hovered, show full text */
+.news-item:hover {
+    background-color: #495057;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    z-index: 10;
+    padding: 15px;
+    width: 100%;
+}
+
+
+        /* News Scrolling Animation */
+        .news-items {
+    display: flex;
+    flex-direction: column;
+    animation: scrollNews 30s linear infinite; /* Increased duration to 30s */
+}
+
+@keyframes scrollNews {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
+
+
         .news-image {
             width: 100%;
             height: 250px;
@@ -84,104 +217,132 @@
             border-radius: 10px;
             margin-bottom: 10px;
         }
+        .sidebar ul li.selected {
+    background-color: #495057; /* Blue highlight */
+    border-radius: 5px;
+}
 
-        .news-wrapper {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
+.sidebar ul li.selected a {
+    color: white; /* Ensures text remains visible */
+    font-weight: bold;
+}
 
-        .news-item {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(100%);
-            transition: opacity 1s ease, transform 1s ease;
-            padding: 10px;
-        }
-
-        .news-item.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #content {
-            background: #4b4a4a;
-            color: aliceblue;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            width: 60%;
-            text-align: left;
-        }
-
-        #footer {
-            margin-top: 20px;
-            background: #222;
-            color: white;
-            padding: 10px;
-        }
-
-        img {
-            border-radius: 10px;
-            margin-top: 15px;
-            width: 100%;
-        }
     </style>
 </head>
 <body>
-
-
-
-  
-  <div id="header">Hey!!! Making Sure Your Safety</div>
-  <div id="menubar">
-    <ul id="menu">
-      <li class="selected"><a href="index.html">Welcome Page</a></li>
-      <li><a href="page_one.html">Navigation</a></li>
-      <li><a href="page_two.html">Safe Zone</a></li>
-      <li><a href="page_three.html">Guardians</a></li>
-      <li><a href="page_four.html">Safety Alarm</a></li>
-      <li><a href="stips.html">Safety Tips & Videos</a></li>
-    </ul>
-  </div>
-
-    <div id="site_content">
-        <!-- News Section with Static Image -->
-        <div class="news-container">
-            <img class="news-image" src="news-image.jpg" alt="Breaking News">
-            <div class="news-wrapper">
-                <div class="news-item active">🚨 Unsafe Workspace: Workplace harassment is a serious issue.</div>
-                <div class="news-item">👩‍💻 Shivani Verma, a software engineer, took legal action.</div>
-                <div class="news-item">💪 Say No to quitting jobs! Stand against workplace violence.</div>
-                <div class="news-item">⚖ Indian Government ensures strict punishment for culprits.</div>
-            </div>
-        </div>
-
-        <!-- Be Safe Content Panel -->
-        <div id="content">
-            <h1>Be Safe</h1>
-            <p>India has been ranked as the most dangerous country for women according to a Thomson Reuters Foundation poll.</p>
-            <img src="wallpaper.jpg" alt="BestPic">
-            <a href="stips.html"><img src="Safety-Tips-For-Woman.jpg" alt="BestPic"></a>
-        </div>
+    <!-- HEADER -->
+    <div class="header">
+        <img src="logo.png" alt="Gujarat Government Logo" class="logo">
+        <div class="header-text">Women's Safety Website</div>
+        <img src="safety.webp" alt="Women's Safety Symbol" class="safety-image">
     </div>
 
-    <div id="footer">With Love ❤ ChaoticUS</div>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <ul>
+            <li class="selected"><a href="index.html"><i class="fas fa-home"></i> Welcome Page</a></li>
+            <li><a href="page_one.html"><i class="fas fa-map-marker-alt"></i>Live Location</a></li>
+            <li><a href="page_two.html"><i class="fas fa-shield-alt"></i> Safe Zones</a></li>
+            <li><a href="page_three.html"><i class="fas fa-user-friends"></i> Guardians</a></li>
+            <li><a href="page_four.html"><i class="fas fa-bell"></i> Safety Alarm</a></li>
+            <li><a href="stips.html"><i class="fas fa-video"></i> Safety Tips & Videos</a></li>
+        </ul>
+    </div>
 
-    <script>
-        let currentIndex = 0;
-        const newsItems = document.querySelectorAll('.news-item');
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <h2>Ensuring Women's Safety: A Collective Responsibility</h2>
+    
+        <p>🔹 Women's safety is a **fundamental right**, and we must work together to create a secure environment.</p>
+        <p>🔹 Violence and harassment can occur anywhere, making **awareness and preparedness** essential.</p>
+        <p>🔹 Governments, communities, and individuals all play a **crucial role** in ensuring women's safety.</p>
+    <hr>
+        <h2>🔹 Slogan on Women’s Empowerment</h2>
+        <ul class="safety-tips">
+            <li>📍 Empower Women, Empower Humanity</li>
+            <li>🏠 Equality for Women is Progress for All</li>
+            <li>💻 Strong Women, Strong World</li>
+            <li>👩‍💼 Women’s Rights are Human Rights</li>
+            <li>🚕 Her Voice, Her Strength</li>
+        </ul>
+    <hr>
+        <h2>🔹 Practical Safety Tips</h2>
+        <ul class="safety-tips">
+            <li>📲 Always share your location with a trusted contact when traveling alone.</li>
+            <li>🗣 Be assertive and trust your instincts when feeling unsafe.</li>
+            <li>🛑 Learn basic self-defense techniques and carry personal safety tools.</li>
+            <li>📞 Save emergency helpline numbers on speed dial.</li>
+            <li>🚦 Avoid dimly lit and isolated areas at night.</li>
+        </ul>
+    <hr>
+        <h2>📊 Women's Safety in India</h2>
+        
+        <p>🔴 **Violence Against Women:** <br> Over <b>4 lakh cases</b> of crimes against women were reported in 2019, including rape, dowry deaths, domestic violence, and harassment.</p>
+        
+        <p>🔴 **Sexual Assault:** <br> In 2019, more than <b>32,000 cases of rape</b> were reported. Many more cases go unreported due to **social stigma** and **fear of reprisal**.</p>
+        
+        <p>🔴 **Domestic Violence:** <br> A national survey found that **one-third of women** in India have experienced physical or sexual violence by their intimate partners.</p>
+    
+        <p>🔴 **Acid Attacks:** <br> India has one of the highest rates of **acid attacks**, causing **severe physical and psychological trauma** for victims.</p>
+    
+        <p>🔴 **Child Marriage:** <br> Around **27% of girls** in India are married before the age of **18**, exposing them to greater risks of violence and limited opportunities.</p>
+    
+        <p>🔴 **Human Trafficking:** <br> India is a hotspot for human trafficking, with women and girls being exploited for **forced labor, sexual exploitation, and domestic servitude**.</p>
+    <hr>
+        <h2>📖 Education & Employment</h2>
+    
+        <p>📚 **Literacy Gap:** <br> Only **50% of Indian women** are literate compared to **65.5% of men**. This limits access to **education and career opportunities**.</p>
+    
+        <p>💼 **Workforce Participation:** <br> Despite women’s contributions, the female labor force participation rate is just **23%**, with many working in the informal sector.</p>
+    <hr>
+        <h2>🌍 Social Freedom & Challenges</h2>
+    
+        <p>🏙 **Urban vs. Rural Divide:** <br> In 2021, only **14.4% of parliamentary seats** were held by women, showing **underrepresentation, especially in rural areas**.</p>
+    
+        <p>💍 **Early Marriage:** <br> Around **27.3% of women** aged **20-24** were married before **18**, limiting their **education and career choices**.</p>
+    </div>
+    
 
-        function showNextNews() {
-            newsItems[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % newsItems.length;
-            newsItems[currentIndex].classList.add('active');
-        }
-
-        setInterval(showNextNews, 2000);
-    </script>
-
+    <!-- NEWS PANEL -->
+    <div class="news-panel">
+        <img class="news-image" src="news-image.jpg" alt="Breaking News">
+        <div class="news-title">Latest News</div>
+        <div class="news-container">
+            <div class="news-items">
+                <div class="news-item">🚨 42% of women feel unsafe in public places.</div>
+                <div class="news-item">👩‍💼 Workplace safety rules strengthened in India.</div>
+                <div class="news-item">⚖ Self-defense training introduced in schools.</div>
+                <div class="news-item">🔍 Government to launch new women’s helpline services.</div>
+                <div class="news-item">🚨 42% of women feel unsafe in public places.</div>
+                <div class="news-item">👩‍💼 Workplace safety rules strengthened in India.</div>
+                <div class="news-item">⚖ Self-defense training introduced in schools.</div>
+                <div class="news-item">🔍 Government to launch new women’s helpline services.</div>
+                <div class="news-item">🚨 42% of women feel unsafe in public places.</div>
+                <div class="news-item">👩‍💼 Workplace safety rules strengthened in India.</div>
+                <div class="news-item">⚖ Self-defense training introduced in schools.</div>
+                <div class="news-item">🔍 Government to launch new women’s helpline services.</div>
+                <div class="news-item">🚨 42% of women feel unsafe in public places.</div>
+                <div class="news-item">👩‍💼 Workplace safety rules strengthened in India.</div>
+                <div class="news-item">⚖ Self-defense training introduced in schools.</div>
+                <div class="news-item">🔍 Government to launch new women’s helpline services.</div>
+                <div class="news-item">🚨 42% of women feel unsafe in public places.</div>
+                <div class="news-item">👩‍💼 Workplace safety rules strengthened in India.</div>
+                <div class="news-item">⚖ Self-defense training introduced in schools.</div>
+                <div class="news-item">🔍 Government to launch new women’s helpline services.</div>
+            </div>
+        </div>
+    </div>
 </body>
+<script>
+    let currentIndex = 0;
+    const newsItems = document.querySelectorAll('.news-item');
+
+    function showNextNews() {
+        newsItems[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % newsItems.length;
+        newsItems[currentIndex].classList.add('active');
+    }
+
+    setInterval(showNextNews, 2000);
+</script>
 </html>
