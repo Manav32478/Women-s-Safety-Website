@@ -150,17 +150,191 @@
             bottom: 0;
             width: 100%;
         }
+        .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    text-align: center;
+}
+.profile-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .profile-picture {
+    width: 65px;
+    height: 50px;
+    border-radius: 50%; /* Ensures it remains a perfect circle */
+    object-fit: cover;
+    border: 2px solid white;
+    display: block;
+}
+
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #343a40;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            width: 150px;
+            
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #495057;
+            color: white;
+        }
+
+/* Title */
+.popup h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: #202124;
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.popup p {
+    font-size: 14px;
+    color: #5f6368;
+    margin-bottom: 20px;
+}
+
+/* Input fields */
+.popup input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #dadce0;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Google-style button */
+.popup button {
+    width: 100%;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.popup button:hover {
+    background-color: #1765cc;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #5f6368;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #d93025;
+}
+
+/* Profile Image Input Styling */
+.popup input[type="file"] {
+    padding: 10px;
+    border: none;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
     </style>
 </head>
 <body>
+<!-- HEADER -->
+<div class="header">
+  <img src="logo.png" alt="Gujarat Government Logo" class="logo">
+  <div class="header-text">Women's Safety Website</div>
+  <img src="safety.webp" alt="Women's Safety Symbol" class="safety-image">
+  <div class="profile-container" onclick="toggleDropdown()">
+      <img id="profilePic" src="profile.webp" alt="Profile Picture" class="profile-picture">
+      <div class="dropdown-menu" id="dropdownMenu">
+          <a href="#" onclick="openPopup('loginPopup')">Sign in</a>
+          <a href="#" onclick="openPopup('registerPopup')">Sign up</a>
+          <a href="#" onclick="openPopup('editProfilePopup')">Profile</a>
+      </div>
+  </div>
+</div>
 
-    <!-- HEADER -->
-    <div class="header">
-        <img src="logo.png" alt="Gujarat Government Logo">
-        <div class="header-text">Women's Safety Website</div>
-        <img src="safety.webp" alt="Women's Safety Symbol">
-    </div>
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
 
+<!-- LOGIN POPUP -->
+<div class="popup" id="loginPopup">
+  <span class="close-btn" onclick="closePopup()">&times;</span>
+  <h2>Login</h2>
+  <input type="text" id="loginUsername" placeholder="Username">
+  <input type="password" id="loginPassword" placeholder="Password">
+  <button onclick="loginUser()">Sign in</button>
+</div>
+
+<!-- REGISTER POPUP -->
+<div class="popup" id="registerPopup">
+  <span class="close-btn" onclick="closePopup()">&times;</span>
+  <h2>Register</h2>
+  <input type="text" placeholder="Full Name">
+  <input type="email" placeholder="Email">
+  <input type="password" placeholder="Password">
+  <button onclick="registerUser()">Sign up</button>
+</div>
+
+<!-- EDIT PROFILE POPUP -->
+<div class="popup" id="editProfilePopup">
+  <span class="close-btn" onclick="closePopup()">&times;</span>
+  <h2>Edit Profile</h2>
+  <input type="text" placeholder="Full Name">
+  <input type="file" id="profileImageInput">
+  <button onclick="updateProfilePicture()">Save</button>
+</div>
+
+</div>
     <!-- SIDEBAR -->
     <div class="sidebar">
         <ul>
@@ -179,21 +353,41 @@
         <div id="dropdown-container">
             <label for="districtSelect">Select a District in Gujarat:</label>
             <select id="districtSelect" onchange="zoomToDistrict()">
-                <option value="">-- Select District --</option>
-                <option value="Ahmedabad">Ahmedabad</option>
-      <option value="Anand">Anand</option>
-      <option value="Aravalli">Aravalli</option>
-      <option value="Banaskantha">Banaskantha</option>
-      <option value="Bharuch">Bharuch</option>
-      <option value="Bhavnagar">Bhavnagar</option>
-      <option value="Gandhinagar">Gandhinagar</option>
-      <option value="Jamnagar">Jamnagar</option>
-      <option value="Junagadh">Junagadh</option>
-      <option value="Kutch">Kutch</option>
-      <option value="Rajkot">Rajkot</option>
-      <option value="Surat">Surat</option>
-      <option value="Vadodara">Vadodara</option>
-            </select>
+              <option value="">-- Select District --</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Amreli">Amreli</option>
+              <option value="Anand">Anand</option>
+              <option value="Aravalli">Aravalli</option>
+              <option value="Banaskantha">Banaskantha</option>
+              <option value="Bharuch">Bharuch</option>
+              <option value="Bhavnagar">Bhavnagar</option>
+              <option value="Botad">Botad</option>
+              <option value="Chhota Udaipur">Chhota Udaipur</option>
+              <option value="Dahod">Dahod</option>
+              <option value="Dang">Dang</option>
+              <option value="Devbhoomi Dwarka">Devbhoomi Dwarka</option>
+              <option value="Gandhinagar">Gandhinagar</option>
+              <option value="Gir Somnath">Gir Somnath</option>
+              <option value="Jamnagar">Jamnagar</option>
+              <option value="Junagadh">Junagadh</option>
+              <option value="Kheda">Kheda</option>
+              <option value="Kutch">Kutch</option>
+              <option value="Mahisagar">Mahisagar</option>
+              <option value="Mehsana">Mehsana</option>
+              <option value="Morbi">Morbi</option>
+              <option value="Narmada">Narmada</option>
+              <option value="Navsari">Navsari</option>
+              <option value="Panchmahal">Panchmahal</option>
+              <option value="Patan">Patan</option>
+              <option value="Porbandar">Porbandar</option>
+              <option value="Rajkot">Rajkot</option>
+              <option value="Sabarkantha">Sabarkantha</option>
+              <option value="Surat">Surat</option>
+              <option value="Surendranagar">Surendranagar</option>
+              <option value="Tapi">Tapi</option>
+              <option value="Vadodara">Vadodara</option>
+              <option value="Valsad">Valsad</option>
+            </select>            
         </div>
 
         <!-- MAP -->
@@ -241,9 +435,104 @@
           "Kutch": [{ lat: 23.250, lng: 69.670 }, { lat: 23.240, lng: 69.650 }, { lat: 23.260, lng: 69.690 }],
           "Aravalli": [{ lat: 23.575, lng: 73.000 }, { lat: 23.580, lng: 73.010 }, { lat: 23.590, lng: 72.990 }],
           "Banaskantha": [{ lat: 24.170, lng: 72.430 }, { lat: 24.180, lng: 72.440 }, { lat: 24.190, lng: 72.420 }],
-          "Bharuch": [{ lat: 21.705, lng: 72.995 }, { lat: 21.710, lng: 73.010 }, { lat: 21.720, lng: 72.980 }]
+          "Bharuch": [{ lat: 21.705, lng: 72.995 }, { lat: 21.710, lng: 73.010 }, { lat: 21.720, lng: 72.980 }],
+          "Amreli": [{ lat: 21.5980, lng: 71.2161 },
+    { lat: 21.6080, lng: 71.2261 },
+    { lat: 21.5880, lng: 71.2061 }
+  ],
+  "Botad": [
+    { lat: 22.1724, lng: 71.6630 },
+    { lat: 22.1804, lng: 71.6760 },
+    { lat: 22.1624, lng: 71.6580 }
+  ],
+  "Chhota Udaipur": [
+    { lat: 22.3045, lng: 74.0183 },
+    { lat: 22.3145, lng: 74.0283 },
+    { lat: 22.2985, lng: 74.0013 }
+  ],
+  "Dahod": [
+    { lat: 22.8310, lng: 74.2556 },
+    { lat: 22.8220, lng: 74.2496 }
+  ],
+  "Dang": [
+    { lat: 20.7510, lng: 73.5010 },
+    { lat: 20.7670, lng: 73.5130 },
+  ],
+  "Devbhoomi Dwarka": [
+    { lat: 22.2350, lng: 69.0120 },
+    { lat: 22.2450, lng: 69.0220 },
+    { lat: 22.2250, lng: 69.0020 }
+  ],
+  "Gir Somnath": [
+    { lat: 20.9020, lng: 70.3740 },
+    { lat: 20.9192, lng: 70.3849 },
+  ],
+  "Kheda": [
+    { lat: 22.7500, lng: 72.6833 },
+    { lat: 22.7600, lng: 72.6933 },
+    { lat: 22.7379, lng: 72.6633 }
+  ],
+  "Mahisagar": [
+    { lat: 22.7750, lng: 73.6040 },
+    { lat: 22.7850, lng: 73.6140 },
+    { lat: 22.7650, lng: 73.5940 }
+  ],
+  "Mehsana": [
+    { lat: 23.6027, lng: 72.3857 },
+    { lat: 23.6127, lng: 72.3957 },
+    { lat: 23.5927, lng: 72.3757 }
+  ],
+  "Morbi": [
+    { lat: 22.8170, lng: 70.8370 },
+    { lat: 22.8270, lng: 70.8470 },
+    { lat: 22.8070, lng: 70.8270 }
+  ],
+  "Narmada": [
+    { lat: 21.8300, lng: 73.6167 },
+    { lat: 21.8400, lng: 73.6267 },
+    { lat: 21.8200, lng: 73.6067 }
+  ],
+  "Navsari": [
+    { lat: 20.9467, lng: 72.9520 },
+    { lat: 20.9567, lng: 72.9620 },
+    { lat: 20.9367, lng: 72.9420 }
+  ],
+  "Panchmahal": [
+    { lat: 22.7760, lng: 73.6040 },
+    { lat: 22.7860, lng: 73.6140 },
+    { lat: 22.7660, lng: 73.5940 }
+  ],
+  "Patan": [
+    { lat: 23.8500, lng: 72.1167 },
+    { lat: 23.8600, lng: 72.1267 },
+    { lat: 23.8400, lng: 72.1067 }
+  ],
+  "Porbandar": [
+    { lat: 21.6417, lng: 69.6293 },
+    { lat: 21.6517, lng: 69.6393 },
+    { lat: 21.6317, lng: 69.6193 }
+  ],
+  "Sabarkantha": [
+    { lat: 23.8500, lng: 73.0000 },
+    { lat: 23.8600, lng: 73.0100 },
+    { lat: 23.8400, lng: 72.9900 }
+  ],
+  "Surendranagar": [
+    { lat: 22.7270, lng: 71.6370 },
+    { lat: 22.7370, lng: 71.6470 },
+    { lat: 22.7170, lng: 71.6270 }
+  ],
+  "Tapi": [
+    { lat: 21.0700, lng: 73.0000 },
+    { lat: 21.0800, lng: 73.0100 },
+    { lat: 21.0600, lng: 72.9900 }
+  ],
+  "Valsad": [
+    { lat: 20.6100, lng: 72.9300 },
+    { lat: 20.6200, lng: 72.9400 },
+    { lat: 20.6000, lng: 72.9200 }
+  ]
         };
-        
         function initMap() {
           map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 22.2587, lng: 71.1924 },
@@ -278,6 +567,91 @@
             });
           }
         }
+        function toggleDropdown() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        function openPopup(id) {
+            document.getElementById(id).style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closePopup() {
+            document.querySelectorAll(".popup").forEach(popup => popup.style.display = "none");
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        function updateProfilePicture() {
+            const fileInput = document.getElementById("profileImageInput");
+            if (fileInput.files.length > 0) {
+                const file = URL.createObjectURL(fileInput.files[0]);
+                document.getElementById("profilePic").src = file;
+                alert("Profile Picture Updated!");
+            }
+        }
+        function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function openPopup(id) {
+    document.getElementById(id).style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function closePopup() {
+    document.querySelectorAll(".popup").forEach(popup => popup.style.display = "none");
+    document.getElementById("overlay").style.display = "none";
+}
+function validateForm(id) {
+    let inputs = document.querySelectorAll(`#${id} input`);
+    for (let input of inputs) {
+        if (input.value.trim() === "") {
+            alert("Please fill out all fields.");
+            return false; // Prevent submission
+        }
+    }
+    return true; // Allow submission
+}
+
+function loginUser() {
+    if (validateForm("loginPopup")) {
+        alert("Login Successful!");
+        closePopup();
+    }
+}
+
+function registerUser() {
+    if (validateForm("registerPopup")) {
+        alert("Registration Successful!");
+        closePopup();
+    }
+}
+
+function updateProfilePicture() {
+    if (validateForm("editProfilePopup")) {
+        const fileInput = document.getElementById("profileImageInput");
+    if (fileInput.files.length > 0) {
+        const file = URL.createObjectURL(fileInput.files[0]);
+        document.getElementById("profilePic").src = file;
+        alert("Profile Picture Updated!");
+        closePopup();
+    }
+    // closePopup(); // Close the pop-up after saving
+        // alert("Profile Updated!");
+        
+    }
+}
+
+// Function to handle login button click
+
+
+// Function to handle saving profile changes
+
+
+// Automatically close the pop-up when clicking outside (overlay)
+document.getElementById("overlay").addEventListener("click", closePopup);
       </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap"></script>
 
