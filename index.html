@@ -374,7 +374,7 @@
         <div class="header-text">Women's Safety Website</div>
         <img src="safety.webp" alt="Women's Safety Symbol" class="safety-image">
         <div class="profile-container" onclick="toggleDropdown()">
-            <img id="profilePic" src="profile.jpg" alt="Profile Picture" class="profile-picture">
+            <img id="profilePic" src="profile.webp" alt="Profile Picture" class="profile-picture">
             <div class="dropdown-menu" id="dropdownMenu">
                 <a href="#" onclick="openPopup('loginPopup')">Sign in</a>
                 <a href="#" onclick="openPopup('registerPopup')">Sign up</a>
@@ -562,29 +562,51 @@ function closePopup() {
     document.querySelectorAll(".popup").forEach(popup => popup.style.display = "none");
     document.getElementById("overlay").style.display = "none";
 }
+function validateForm(id) {
+    let inputs = document.querySelectorAll(`#${id} input`);
+    for (let input of inputs) {
+        if (input.value.trim() === "") {
+            alert("Please fill out all fields.");
+            return false; // Prevent submission
+        }
+    }
+    return true; // Allow submission
+}
 
-// Function to handle login button click
 function loginUser() {
-    alert("Login Successful!");  // Placeholder alert (replace with actual login logic)
-    closePopup(); // Close the pop-up after login
+    if (validateForm("loginPopup")) {
+        alert("Login Successful!");
+        closePopup();
+    }
 }
 
-// Function to handle register button click
 function registerUser() {
-    alert("Registration Successful!");  // Placeholder alert (replace with actual registration logic)
-    closePopup(); // Close the pop-up after registration
+    if (validateForm("registerPopup")) {
+        alert("Registration Successful!");
+        closePopup();
+    }
 }
 
-// Function to handle saving profile changes
 function updateProfilePicture() {
-    const fileInput = document.getElementById("profileImageInput");
+    if (validateForm("editProfilePopup")) {
+        const fileInput = document.getElementById("profileImageInput");
     if (fileInput.files.length > 0) {
         const file = URL.createObjectURL(fileInput.files[0]);
         document.getElementById("profilePic").src = file;
         alert("Profile Picture Updated!");
+        closePopup();
     }
-    closePopup(); // Close the pop-up after saving
+    // closePopup(); // Close the pop-up after saving
+        // alert("Profile Updated!");
+        
+    }
 }
+
+// Function to handle login button click
+
+
+// Function to handle saving profile changes
+
 
 // Automatically close the pop-up when clicking outside (overlay)
 document.getElementById("overlay").addEventListener("click", closePopup);
