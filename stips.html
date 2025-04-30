@@ -159,17 +159,228 @@
         .shorts-container:hover .shorts-wrapper {
             animation-play-state: paused;
         }
+        /* Helpful Resources Styling */
+.resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.resources-list li {
+    background-color: #ffffff;
+    padding: 14px 18px;
+    border-left: 6px solid #495057;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.resources-list li:hover {
+    background-color: #f1f3f5;
+    transform: translateY(-2px);
+}
+
+.resources-list li a {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.resources-list li a:hover {
+    text-decoration: underline;
+}
+
+/* Add space after Helpful Resources section */
+section.resources-section {
+    margin-bottom: 50px;
+}
+.profile-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .profile-picture {
+    width: 65px;
+    height: 50px;
+    border-radius: 50%; /* Ensures it remains a perfect circle */
+    object-fit: cover;
+    border: 2px solid white;
+    display: block;
+}
+
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #343a40;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            width: 150px;
+            
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #495057;
+            color: white;
+        }
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    text-align: center;
+}
+
+/* Title */
+.popup h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: #202124;
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.popup p {
+    font-size: 14px;
+    color: #5f6368;
+    margin-bottom: 20px;
+}
+
+/* Input fields */
+.popup input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #dadce0;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Google-style button */
+.popup button {
+    width: 100%;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.popup button:hover {
+    background-color: #1765cc;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #5f6368;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #d93025;
+}
+
+/* Profile Image Input Styling */
+.popup input[type="file"] {
+    padding: 10px;
+    border: none;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
     </style>
 </head>
 <body>
-
-    <!-- HEADER -->
-    <div class="header">
-        <img src="logo.png" alt="Gujarat Government Logo">
-        <div class="header-text">Women's Safety Website</div>
-        <img src="safety.webp" alt="Women's Safety Symbol">
+<!-- HEADER -->
+<div class="header">
+    <img src="logo.png" alt="Gujarat Government Logo" class="logo">
+    <div class="header-text">Women's Safety Website</div>
+    <img src="safety.webp" alt="Women's Safety Symbol" class="safety-image">
+    <div class="profile-container" onclick="toggleDropdown()">
+        <img id="profilePic" src="profile.webp" alt="Profile Picture" class="profile-picture">
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="#" onclick="openPopup('loginPopup')">Sign in</a>
+            <a href="#" onclick="openPopup('registerPopup')">Sign up</a>
+            <a href="#" onclick="openPopup('editProfilePopup')">Profile</a>
+        </div>
     </div>
+</div>
 
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+<!-- LOGIN POPUP -->
+<div class="popup" id="loginPopup">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <h2>Login</h2>
+    <input type="text" id="loginUsername" placeholder="Username">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="loginUser()">Sign in</button>
+</div>
+
+<!-- REGISTER POPUP -->
+<div class="popup" id="registerPopup">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <h2>Register</h2>
+    <input type="text" placeholder="Full Name">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button onclick="registerUser()">Sign up</button>
+</div>
+
+<!-- EDIT PROFILE POPUP -->
+<div class="popup" id="editProfilePopup">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <h2>Edit Profile</h2>
+    <input type="text" placeholder="Full Name">
+    <input type="file" id="profileImageInput">
+    <button onclick="updateProfilePicture()">Save</button>
+</div>
+
+</div>
     <!-- SIDEBAR -->
     <div class="sidebar">
         <ul>
@@ -203,7 +414,21 @@
             style="background: linear-gradient(to right, #a1a2a3, #a1a2a3); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; display: block; margin: 20px auto;">
             🚨 Quick Emergency Tips
         </button>
-
+<!-- Helpful Resources Section -->
+<section class="resources-section" style="margin-top: 30px;">
+    <h2 style="color: #333; border-bottom: 2px solid #c9f2f5; padding-bottom: 5px;">🌐 Helpful Women's Safety Resources</h2>
+    <ul class="resources-list">
+        <li>
+            🔗 <a href="https://en.wikipedia.org/wiki/Women%27s_safety_in_India" target="_blank">Women's Safety in India - Wikipedia</a>
+        </li>
+        <li>
+            🔗 <a href="https://en.wikipedia.org/wiki/Violence_against_women_in_India" target="_blank">Violence Against Women in India - Wikipedia</a>
+        </li>
+        <li>
+            🔗 <a href="https://www.ncw.nic.in/" target="_blank">National Commission for Women - Official Website</a>
+        </li>
+    </ul>
+</section>
         <!-- Video Tutorials Section -->
         <section>
             <h2 style="color: #333; border-bottom: 2px solid #c9f2f5; padding-bottom: 5px;">🎥 Watch These Safety Tutorials</h2>
@@ -242,6 +467,91 @@
         function showEmergencyTips() {
             alert("🚨 Emergency Tips:\n\n📞 Call emergency helpline immediately.\n📍 Share your live location with trusted contacts.\n🔊 Use a loud safety alarm to attract attention.");
         }
+        function toggleDropdown() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        function openPopup(id) {
+            document.getElementById(id).style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closePopup() {
+            document.querySelectorAll(".popup").forEach(popup => popup.style.display = "none");
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        function updateProfilePicture() {
+            const fileInput = document.getElementById("profileImageInput");
+            if (fileInput.files.length > 0) {
+                const file = URL.createObjectURL(fileInput.files[0]);
+                document.getElementById("profilePic").src = file;
+                alert("Profile Picture Updated!");
+            }
+        }
+        function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function openPopup(id) {
+    document.getElementById(id).style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function closePopup() {
+    document.querySelectorAll(".popup").forEach(popup => popup.style.display = "none");
+    document.getElementById("overlay").style.display = "none";
+}
+function validateForm(id) {
+    let inputs = document.querySelectorAll(`#${id} input`);
+    for (let input of inputs) {
+        if (input.value.trim() === "") {
+            alert("Please fill out all fields.");
+            return false; // Prevent submission
+        }
+    }
+    return true; // Allow submission
+}
+
+function loginUser() {
+    if (validateForm("loginPopup")) {
+        alert("Login Successful!");
+        closePopup();
+    }
+}
+
+function registerUser() {
+    if (validateForm("registerPopup")) {
+        alert("Registration Successful!");
+        closePopup();
+    }
+}
+
+function updateProfilePicture() {
+    if (validateForm("editProfilePopup")) {
+        const fileInput = document.getElementById("profileImageInput");
+    if (fileInput.files.length > 0) {
+        const file = URL.createObjectURL(fileInput.files[0]);
+        document.getElementById("profilePic").src = file;
+        alert("Profile Picture Updated!");
+        closePopup();
+    }
+    // closePopup(); // Close the pop-up after saving
+        // alert("Profile Updated!");
+        
+    }
+}
+
+// Function to handle login button click
+
+
+// Function to handle saving profile changes
+
+
+// Automatically close the pop-up when clicking outside (overlay)
+document.getElementById("overlay").addEventListener("click", closePopup);
     </script>
 
 </body>
