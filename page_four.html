@@ -369,16 +369,19 @@
 
     <!-- MAIN CONTENT -->
     <div class="container">
-        <script>
-            function play() {
-                document.getElementById("audio").play();
-            }
-            function pause() {
-                document.getElementById("audio").pause();
-            }
-        </script>
+        <audio id="audio" src="siren.mp3" loop></audio>
 
-        <audio id="audio" src="siren.mp3"></audio>
+<script>
+function play() {
+    const audio = document.getElementById("audio");
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function pause() {
+    document.getElementById("audio").pause();
+}
+</script>
 
         <div class="button-container">
             <div class="sos-button" onclick="play()">🚨 SOS 🚨</div>
