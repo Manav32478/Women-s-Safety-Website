@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women's Safety Website</title>
     <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -404,7 +407,7 @@
         
         <div class="input-container">
             <label for="number1">Mobile Number</label>
-            <input type="tel" id="number1" class="input-field" placeholder="Enter mobile number" required>
+            <input type="tel" id="number1" class="input-field" placeholder="Enter mobile number with country code" required>
 
             <label for="textMessage1">Message</label>
             <textarea id="textMessage1" class="input-field">Please save me. I am in danger</textarea>
@@ -423,18 +426,18 @@
         }
     
         function sendMessage() {
-          let number = document.getElementById("number1").value.trim();
-          let message = document.getElementById("textMessage1").value.trim();
-    
-          if (number === '' || number.length < 10) {
-            alert("Please enter a valid phone number.");
-            return;
-          }
-    
-          // ✅ Fixed: Corrected backticks (`) instead of incorrect syntax
-          let whatsappURL = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(message)}`;
-          window.open(whatsappURL, '_blank');
-        }
+    let message = document.getElementById("textMessage1").value.trim();
+
+    if (iti.isValidNumber()) {
+        let number = iti.getNumber(); // get full international number
+        let whatsappURL = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(message)}`;
+        window.open(whatsappURL, '_blank');
+    } else {
+        alert("Please enter a valid phone number.");
+    }
+}
+
+
     
         function callEmergency() {
           window.location.href = "tel:181"; // ✅ Fixed emergency number to match the button
@@ -515,6 +518,13 @@ function updateProfilePicture() {
         
     }
 }
+var input = document.querySelector("#number1");
+var iti = window.intlTelInput(input, {
+    initialCountry: "in",  // Default to India, you can set to "auto" if preferred
+    separateDialCode: true, // Shows dial code separately
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+});
+
 
 // Function to handle login button click
 
