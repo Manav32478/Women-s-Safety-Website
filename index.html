@@ -364,6 +364,62 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
+@media (max-width: 400px) {
+    .header-text {
+        font-size: 1.2rem;
+    }
+
+    .header, .news-panel {
+        padding: 5px;
+    }
+
+    .sidebar {
+        display: block; /* show sidebar on mobile */
+        position: absolute;
+        width: 70%; /* adjust sidebar width */
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .sidebar ul {
+        padding: 10px;
+    }
+
+    .sidebar ul li {
+        padding: 10px;
+    }
+
+    .safety-tips {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .popup {
+        width: 80%;
+        margin: auto;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 90%; /* make inputs full width */
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    button {
+        width: 90%; /* make buttons full width */
+        padding: 10px;
+    }
+}
+.username-display {
+    color: white;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
 
     </style>
 </head>
@@ -375,10 +431,12 @@
         <img src="safety.webp" alt="Women's Safety Symbol" class="safety-image">
         <div class="profile-container" onclick="toggleDropdown()">
             <img id="profilePic" src="profile.jpg" alt="Profile Picture" class="profile-picture">
+            <div id="loggedInUsername" class="username-display"></div> 
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#" onclick="openPopup('loginPopup')">Sign in</a>
+                <a href="#" onclick="openPopup('loginPopup')">Log in</a>
                 <a href="#" onclick="openPopup('registerPopup')">Sign up</a>
-                <a href="#" onclick="openPopup('editProfilePopup')">Profile</a>
+                <a href="#" onclick="openPopup('editProfilePopup')">Profile Picture</a>
+                <a href="#" onclick="openPopup('profileSection')">Your Profile</a>
             </div>
         </div>
     </div>
@@ -399,9 +457,9 @@
     <div class="popup" id="registerPopup">
         <span class="close-btn" onclick="closePopup()">&times;</span>
         <h2>Register</h2>
-        <input type="text" placeholder="Full Name">
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
+        <input type="text" id="registerName" placeholder="Full Name">
+        <input type="email" id="registerEmail" placeholder="Email">
+        <input type="password" id="registerPassword" placeholder="Password">
         <button onclick="registerUser()">Sign up</button>
     </div>
     
@@ -413,7 +471,16 @@
         <input type="file" id="profileImageInput">
         <button onclick="updateProfilePicture()">Save</button>
     </div>
-    
+    <!-- YOUR PROFILE POPUP -->
+<div class="popup" id="profileSection">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <h2>Your Profile</h2>
+    <p><strong>Name:</strong> <span id="profileName">N/A</span></p>
+    <p><strong>Email:</strong> <span id="profileEmail">N/A</span></p>
+    <p><strong>Username:</strong> <span id="profileUsername">N/A</span></p>
+</div>
+
+
     </div>
     <!-- PROFILE SECTION -->
     
@@ -540,14 +607,6 @@
             document.getElementById("overlay").style.display = "none";
         }
 
-        function updateProfilePicture() {
-            const fileInput = document.getElementById("profileImageInput");
-            if (fileInput.files.length > 0) {
-                const file = URL.createObjectURL(fileInput.files[0]);
-                document.getElementById("profilePic").src = file;
-                alert("Profile Picture Updated!");
-            }
-        }
         function toggleDropdown() {
     const menu = document.getElementById("dropdownMenu");
     menu.style.display = menu.style.display === "block" ? "none" : "block";
@@ -573,43 +632,105 @@ function validateForm(id) {
     return true; // Allow submission
 }
 
-function loginUser() {
-    if (validateForm("loginPopup")) {
-        alert("Login Successful!");
-        closePopup();
-    }
-}
-
 function registerUser() {
-    if (validateForm("registerPopup")) {
+    const name = document.getElementById("registerName").value.trim();
+    const email = document.getElementById("registerEmail").value.trim();
+    const password = document.getElementById("registerPassword").value.trim();
+
+    if (name && email && password) {
+        const username = name.replace(/\s+/g, '').toLowerCase(); // Create username from name
+
+        const userData = {
+            name,
+            email,
+            username,
+            password
+        };
+
+        localStorage.setItem("userProfile", JSON.stringify(userData));
         alert("Registration Successful!");
         closePopup();
+        updateProfileUI();
+    } else {
+        alert("Please fill all fields.");
     }
 }
 
-function updateProfilePicture() {
-    if (validateForm("editProfilePopup")) {
-        const fileInput = document.getElementById("profileImageInput");
-    if (fileInput.files.length > 0) {
-        const file = URL.createObjectURL(fileInput.files[0]);
-        document.getElementById("profilePic").src = file;
-        alert("Profile Picture Updated!");
+function loginUser() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    const storedUser = JSON.parse(localStorage.getItem("userProfile"));
+
+    if (storedUser && (username === storedUser.username || username === storedUser.email) && password === storedUser.password) {
+        alert("Login Successful!");
+        localStorage.setItem("isLoggedIn", "true");
+        updateProfileUI();
         closePopup();
-    }
-    // closePopup(); // Close the pop-up after saving
-        // alert("Profile Updated!");
-        
+    } else {
+        alert("Invalid credentials.");
     }
 }
 
-// Function to handle login button click
-
-
-// Function to handle saving profile changes
-
-
-// Automatically close the pop-up when clicking outside (overlay)
 document.getElementById("overlay").addEventListener("click", closePopup);
+document.addEventListener("click", function (event) {
+    const dropdown = document.getElementById("dropdownMenu");
+    const profileContainer = document.querySelector(".profile-container");
+
+    if (!profileContainer.contains(event.target)) {
+        dropdown.style.display = "none";
+    }
+});
+function updateProfilePicture() {
+    const fileInput = document.getElementById("profileImageInput");
+
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const base64Image = e.target.result;
+
+            // Set profile picture and store in localStorage
+            document.getElementById("profilePic").src = base64Image;
+            localStorage.setItem("profilePicture", base64Image);
+
+            alert("Profile Picture Updated!");
+            closePopup();
+        };
+
+        reader.readAsDataURL(file);
+    } else {
+        alert("Please select an image.");
+    }
+}
+// Load stored profile picture from localStorage on page load
+window.addEventListener("DOMContentLoaded", function() {
+    const savedPic = localStorage.getItem("profilePicture");
+    if (savedPic) {
+        document.getElementById("profilePic").src = savedPic;
+    }
+});
+
+function updateProfileUI() {
+    const profile = JSON.parse(localStorage.getItem("userProfile"));
+    if (profile) {
+        document.getElementById("profileName").textContent = profile.name || "N/A";
+        document.getElementById("profileEmail").textContent = profile.email || "N/A";
+        document.getElementById("profileUsername").textContent = profile.username || "N/A";
+
+        // Display username under profile pic
+        //document.getElementById("loggedInUsername").textContent = `@${profile.username}`;
+    }
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    const savedPic = localStorage.getItem("profilePicture");
+    if (savedPic) {
+        document.getElementById("profilePic").src = savedPic;
+    }
+
+    updateProfileUI();
+});
 
 </script>
 </html>
