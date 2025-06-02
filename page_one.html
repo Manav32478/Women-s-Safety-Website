@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women's Safety Website</title>
     <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script> 
+    <!-- intl-tel-input CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+
+<!-- intl-tel-input JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -379,7 +386,7 @@
             <h2>Live Location with Google Maps</h2>
             <button class="btn" onclick="getLocation()">Show My Location</button>
             <h4 id="status"></h4>
-            <input type="text" id="phone-number" placeholder="Enter phone number (with country code)">
+            <input type="tel" id="phone-number" placeholder="Enter phone number" style="padding: 10px; border-radius: 5px; width: 300px;">
             <button class="btn" onclick="shareLocation()">Share Location</button>
             <div id="map"></div>
         </div>
@@ -418,23 +425,51 @@
             });
 
             status.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
+            status.style.color = "black";
         }
 
         function showError(error) {
-            status.textContent = "Unable to retrieve location.";
-        }
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            status.textContent = "Location permission denied. Please allow location access.";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            status.textContent = "Location information is unavailable.";
+            break;
+        case error.TIMEOUT:
+            status.textContent = "Location request timed out. Try again.";
+            break;
+        case error.UNKNOWN_ERROR:
+        default:
+            status.textContent = "An unknown error occurred while retrieving location.";
+            break;
+    }
+
+    // Optional: show in red to highlight the error
+    status.style.color = "red";
+}
+
+// Initialize intl-tel-input
+const phoneInput = document.querySelector("#phone-number");
+const itia = window.intlTelInput(phoneInput, {
+    initialCountry: "in", // Default to India
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+});
 
         function shareLocation() {
-            var phoneNumber = document.getElementById('phone-number').value.trim();
-            if (phoneNumber === '') {
-                alert('Please enter a phone number.');
-                return;
-            }
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var message = `My location: https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
-                window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`);
-            });
-        }
+    if (!itia.isValidNumber()) {
+        alert("Please enter a valid phone number.");
+        return;
+    }
+
+    const phoneNumber = itia.getNumber(); // E.164 format
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var message = `My location: https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
+        window.open(`https://api.whatsapp.com/send?phone=${phoneNumber.replace(/\D/g, '')}&text=${encodeURIComponent(message)}`);
+    });
+}
+
 
         function initMap() {}
         function toggleDropdown() {
@@ -513,7 +548,12 @@ function updateProfilePicture() {
         
     }
 }
-
+var input = document.querySelector("#number1");
+var iti = window.intlTelInput(input, {
+    initialCountry: "in",  // Default to India, you can set to "auto" if preferred
+    separateDialCode: true, // Shows dial code separately
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+});
 // Function to handle login button click
 
 
@@ -524,11 +564,7 @@ function updateProfilePicture() {
 document.getElementById("overlay").addEventListener("click", closePopup);
     </script>
 
-<script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap"
-async
-defer
-></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbl-QdcG2sHyqxz4Qu_ZE7pjmZNY1KP7I&callback=initMap"></script>
 
 </body>
 </html>
